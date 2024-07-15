@@ -1,6 +1,8 @@
 import { getUsers } from '@/lib/db';
 import { UsersTable } from './users-table';
 import { Search } from './search';
+import { Form } from './form';
+import { SubmitButton } from './submit-button';
 
 export default async function IndexPage({
   searchParams
@@ -20,6 +22,16 @@ export default async function IndexPage({
         <Search value={searchParams.q} />
       </div>
       <UsersTable users={users} offset={newOffset} />
+      <Form action={register}>
+          <SubmitButton>Ingresar</SubmitButton>
+          <p className="text-center text-sm text-gray-600">
+            {'Already have an account? '}
+            <Link href="/login" className="font-semibold text-gray-800">
+              Sign in
+            </Link>
+            {' instead.'}
+          </p>
+        </Form>
     </main>
   );
 }
