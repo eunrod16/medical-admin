@@ -12,10 +12,58 @@ export function Form({
     >
       <div>
         <label
+          htmlFor="name"
+          className="block text-xs text-gray-600 uppercase"
+        >
+          Nombre
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="input"
+          placeholder=""
+          required
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="age"
+          className="block text-xs text-gray-600 uppercase"
+        >
+          Edad
+        </label>
+        <input
+          id="age"
+          name="age"
+          type="number"
+          placeholder=""
+          required
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="phone"
+          className="block text-xs text-gray-600 uppercase"
+        >
+          Teléfono
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="number"
+          placeholder=""
+          required
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+        />
+      </div>
+      <div>
+        <label
           htmlFor="email"
           className="block text-xs text-gray-600 uppercase"
         >
-          Email Address
+          Correo Electrónico
         </label>
         <input
           id="email"
@@ -27,21 +75,61 @@ export function Form({
           className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
+
       <div>
         <label
-          htmlFor="password"
+          htmlFor="address"
           className="block text-xs text-gray-600 uppercase"
         >
-          Password
+          Dirección
         </label>
         <input
-          id="password"
-          name="password"
-          type="password"
+          id="address"
+          name="address"
+          type="text"
+          placeholder="San Benito Petén"
           required
           className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
+
+      <div>
+        <label
+          htmlFor="address"
+          className="block text-xs text-gray-600 uppercase"
+        >
+          Correo Electrónico
+        </label>
+        <input
+          id="address"
+          name="address"
+          type="text"
+          placeholder="San Benito Petén"
+          required
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label
+          htmlFor="options"
+          className="block text-xs text-gray-600 uppercase"
+        >
+          Médico Selecctionado
+        </label>
+        <select
+          id="options"
+          name="options"
+          required
+          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+        >
+          <option value="">Please select an option</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+
       {children}
     </form>
   );
