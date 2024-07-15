@@ -14,8 +14,8 @@ async function register(formData: FormData) {
     return 'User already exists'; // TODO: Handle errors with useFormStatus
   } else {
     await createUser(email, password);
-    redirect('/login');*/
-  }
+    redirect('/login');
+  }*/
 }
 
 
