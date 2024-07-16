@@ -31,7 +31,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const updatedPacientes = await fetchUsers(); // Implement fetchUsers to get the latest data
+        const { pacientes: updatedPacientes } = await fetchUsers(); // Implement fetchUsers to get the latest data
         setPacientes(updatedPacientes);
       } catch (error) {
         console.error('Error fetching data:', error);
