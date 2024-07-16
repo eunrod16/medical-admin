@@ -6,7 +6,7 @@ import { SubmitButton } from './submit-button';
 import { createPatient } from '@/lib/db';
 
 async function register(formData: FormData) {
-//  'use server';
+ 'use server';
   let nombre = formData.get('name') as string;
   let direccion = formData.get('address') as string;
   let telefono = formData.get('phone') as string;

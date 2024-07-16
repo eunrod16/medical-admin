@@ -13,7 +13,7 @@ export const db = drizzle(
   })
 );
 
-const pacientes = pgTable('pacientes', {
+export const pacientes = pgTable('pacientes', {
   id: serial('id').primaryKey(),
   nombre: varchar('nombre', { length: 50 }),
   estado: varchar('diagnostico', { length: 50 }),
@@ -21,9 +21,6 @@ const pacientes = pgTable('pacientes', {
 });
 
 export type SelectUser = typeof pacientes.$inferSelect;
-
-// Export `pacientes` here
-export { pacientes };
 
 export async function getUsers(
   search: string,

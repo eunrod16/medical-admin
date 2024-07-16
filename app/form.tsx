@@ -95,27 +95,10 @@ export function Form({
 
       <div>
         <label
-          htmlFor="address"
-          className="block text-xs text-gray-600 uppercase"
-        >
-          Correo Electrónico
-        </label>
-        <input
-          id="address"
-          name="address"
-          type="text"
-          placeholder="San Benito Petén"
-          required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-        />
-      </div>
-
-      <div>
-        <label
           htmlFor="options"
           className="block text-xs text-gray-600 uppercase"
         >
-          Médico Selecctionado
+          Médico Seleccionado
         </label>
         <select
           id="options"
