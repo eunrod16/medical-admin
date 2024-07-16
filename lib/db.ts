@@ -17,7 +17,11 @@ export const pacientes = pgTable('pacientes', {
   id: serial('id').primaryKey(),
   nombre: varchar('nombre', { length: 50 }),
   estado: varchar('diagnostico', { length: 50 }),
-  medico: varchar('medico', { length: 50 })
+  medico: varchar('medico', { length: 50 }),
+  direccion: varchar('direccion', { length: 255 }),  
+  telefono: varchar('telefono', { length: 50 }),
+  email: varchar('email', { length: 100 }),
+  edad: varchar('edad', { length: 3 })
 });
 
 export type SelectUser = typeof pacientes.$inferSelect;
