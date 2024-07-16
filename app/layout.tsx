@@ -57,7 +57,7 @@ export default function RootLayout({
                 href="/"
               >
                 <Logo />
-                <span className="">ACME</span>
+                <span className="">Medical Admin</span>
               </Link>
               <User />
             </header>

@@ -14,10 +14,10 @@ import { deleteUser } from './actions';
 import { useRouter } from 'next/navigation';
 
 export function UsersTable({
-  users,
+  pacientes,
   offset
 }: {
-  users: SelectUser[];
+  pacientes: SelectUser[];
   offset: number | null;
 }) {
   const router = useRouter();
@@ -33,14 +33,14 @@ export function UsersTable({
           <TableHeader>
             <TableRow>
               <TableHead className="max-w-[150px]">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Email</TableHead>
-              <TableHead className="hidden md:table-cell">Username</TableHead>
+              <TableHead className="hidden md:table-cell">Médico</TableHead>
+              <TableHead className="hidden md:table-cell">Estado</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
-              <UserRow key={user.id} user={user} />
+            {pacientes.map((paciente) => (
+              <UserRow key={paciente.id} paciente={paciente} />
             ))}
           </TableBody>
         </Table>
@@ -58,15 +58,15 @@ export function UsersTable({
   );
 }
 
-function UserRow({ user }: { user: SelectUser }) {
-  const userId = user.id;
-  const deleteUserWithId = deleteUser.bind(null, userId);
+function UserRow({ paciente }: { paciente: SelectUser }) {
+  const pacienteId = paciente.id;
+  const deleteUserWithId = deleteUser.bind(null, pacienteId);
 
   return (
     <TableRow>
-      <TableCell className="font-medium">{user.name}</TableCell>
-      <TableCell className="hidden md:table-cell">{user.email}</TableCell>
-      <TableCell>{user.username}</TableCell>
+      <TableCell className="font-medium">{paciente.nombre}</TableCell>
+      <TableCell className="hidden md:table-cell">{paciente.estado}</TableCell>
+      <TableCell>{paciente.medico}</TableCell>
       <TableCell>
         <Button
           className="w-full"

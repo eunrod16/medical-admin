@@ -13,14 +13,14 @@ export const db = drizzle(
   })
 );
 
-const users = pgTable('users', {
+const pacientes = pgTable('pacientes', {
   id: serial('id').primaryKey(),
-  name: varchar('name', { length: 50 }),
-  username: varchar('username', { length: 50 }),
-  email: varchar('email', { length: 50 })
+  nombre: varchar('nombre', { length: 50 }),
+  estado: varchar('diagnostico', { length: 50 }),
+  medico: varchar('medico', { length: 50 })
 });
 
-export type SelectUser = typeof users.$inferSelect;
+export type SelectUser = typeof pacientes.$inferSelect;
 
 export async function getUsers(
   search: string,
@@ -34,8 +34,8 @@ export async function getUsers(
     return {
       users: await db
         .select()
-        .from(users)
-        .where(ilike(users.name, `%${search}%`))
+        .from(pacientes)
+        .where(ilike(pacientes.name, `%${search}%`))
         .limit(1000),
       newOffset: null
     };
@@ -45,11 +45,11 @@ export async function getUsers(
     return { users: [], newOffset: null };
   }
 
-  const moreUsers = await db.select().from(users).limit(20).offset(offset);
+  const moreUsers = await db.select().from(pacientes).limit(20).offset(offset);
   const newOffset = moreUsers.length >= 20 ? offset + 20 : null;
-  return { users: moreUsers, newOffset };
+  return { pacientes: moreUsers, newOffset };
 }
 
 export async function deleteUserById(id: number) {
-  await db.delete(users).where(eq(users.id, id));
+ // await db.delete(users).where(eq(users.id, id));
 }
