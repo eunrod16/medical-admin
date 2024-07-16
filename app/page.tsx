@@ -36,7 +36,7 @@ export default async function IndexPage({
       <div className="w-full mb-4">
         <Search value={searchParams.q} />
       </div>
-      <UsersTable pacientes={pacientes} offset={newOffset} />
+      <UsersTable initialPacientes={pacientes} offset={newOffset} />
       <Form action={register}>
           <SubmitButton>Ingresar</SubmitButton>
           <p className="text-center text-sm text-gray-600">
