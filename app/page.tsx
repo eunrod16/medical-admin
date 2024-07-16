@@ -9,18 +9,13 @@ async function register(formData: FormData) {
   'use server';
   let nombre = formData.get('name') as string;
   let direccion = formData.get('address') as string;
-  let user = await getUser(email);
-  createPatient.bind(null, formData);
-  /*let email = formData.get('email') as string;
-  let password = formData.get('password') as string;
-  let user = await getUser(email);
+  let telefono = formData.get('phone') as string;
+  let email = formData.get('email') as string;
+  let option = formData.get('options') as string;
+  let edad = formData.get('age') as string;
+  await createPatient(nombre,direccion, email, telefono,option,edad );
 
-  if (user.length > 0) {
-    return 'User already exists'; // TODO: Handle errors with useFormStatus
-  } else {
-    await createUser(email, password);
-    redirect('/login');
-  }*/
+
 }
 
 
