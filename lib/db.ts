@@ -32,7 +32,7 @@ export async function getUsers(
   // Always search the full table, not per page
   if (search) {
     return {
-      users: await db
+      pacientes: await db
         .select()
         .from(pacientes)
         .where(ilike(pacientes.name, `%${search}%`))
