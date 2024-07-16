@@ -16,12 +16,13 @@ export const db = drizzle(
 export const pacientes = pgTable('pacientes', {
   id: serial('id').primaryKey(),
   nombre: varchar('nombre', { length: 50 }),
-  estado: varchar('diagnostico', { length: 50 }),
+  estado: varchar('estado', { length: 50 }),
   medico: varchar('medico', { length: 50 }),
   direccion: varchar('direccion', { length: 255 }),  
   telefono: varchar('telefono', { length: 50 }),
   email: varchar('email', { length: 100 }),
-  edad: varchar('edad', { length: 3 })
+  edad: varchar('edad', { length: 3 }),
+  serial: varchar('serial', { length: 3 }),
 });
 
 export type SelectUser = typeof pacientes.$inferSelect;
@@ -58,6 +59,6 @@ export async function deleteUserById(id: number) {
  // await db.delete(users).where(eq(users.id, id));
 }
 
-export async function createPatient(numero_paciente: number, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
-  await db.insert(pacientes).values({ id:numero_paciente, nombre: nombre, direccion: direccion, email: email, diagnostico: "En Espera", medico: option, edad:edad, telefono: telefono });
+export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: option, edad:edad, telefono: telefono });
 }
