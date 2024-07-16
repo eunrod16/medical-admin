@@ -7,6 +7,9 @@ import { createPatient } from '@/lib/db';
 
 async function register(formData: FormData) {
   'use server';
+  let nombre = formData.get('name') as string;
+  let direccion = formData.get('address') as string;
+  let user = await getUser(email);
   createPatient.bind(null, formData);
   /*let email = formData.get('email') as string;
   let password = formData.get('password') as string;
