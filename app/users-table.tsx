@@ -41,8 +41,8 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
     // Initial data fetch
     fetchData();
 
-    // Set interval to reload data every 10 seconds
-    const intervalId = setInterval(fetchData, 10000);
+    // Set interval to reload data every 10 seconds 10000
+    const intervalId = setInterval(fetchData, 10000000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
