@@ -2,6 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '@/lib/db'; // Asegúrate de que este sea el camino correcto al archivo db.ts
 import { pacientes } from '@/lib/db'; // Asegúrate de que este sea el camino correcto al archivo db.ts
+import { asc } from 'drizzle-orm';
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
