@@ -67,12 +67,11 @@ export async function deleteUserById(id: number) {
 
 export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
   if(option=='MG'){
-    const ListaMedicos = await db.select([medicos.nombre]).from(medicos);
-    const loadMedicos = await db.select({ 
+    const ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos);
+    const loadMedicos = await db.select({
       nombre: pacientes.medico,
       count: sql<number>`count(${pacientes.id})`.mapWith(Number)
-  }).from(pacientes)
-      .groupBy(sql`${pacientes.medico}`);
+    }).from(pacientes).groupBy(pacientes.medico);
       //.having(sql`count(${usersTable.id}) > 300`)
       console.log(ListaMedicos);
       console.log(loadMedicos);
