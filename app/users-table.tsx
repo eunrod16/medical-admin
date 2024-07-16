@@ -27,11 +27,16 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
   const router = useRouter();
   const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const updatedPacientes = await fetchUsers(); // Implement fetchUsers to get the latest data
-        setPacientes(updatedPacientes);
+        const response = await fetch('fetch-users');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPacientes(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

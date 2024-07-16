@@ -22,10 +22,8 @@ const pacientes = pgTable('pacientes', {
 
 export type SelectUser = typeof pacientes.$inferSelect;
 
-export async function fetchUsers() {
-  const moreUsers = await db.select().from(pacientes).orderBy(asc(pacientes.id)).limit(20);
-  return { pacientes: moreUsers };
-}
+// Export `pacientes` here
+export { pacientes };
 
 export async function getUsers(
   search: string,
