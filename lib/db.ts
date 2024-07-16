@@ -54,7 +54,6 @@ export async function deleteUserById(id: number) {
  // await db.delete(users).where(eq(users.id, id));
 }
 
-export async function createPatient(nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
-
-  // await db.delete(users).where(eq(users.id, id));
+export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+  await db.insert(pacientes).values({ id:numero_paciente, nombre: nombre, direccion: direccion, email: email, diagnostico: "En Espera", medico: option, edad:edad, telefono: telefono });
 }
