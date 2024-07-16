@@ -30,7 +30,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('fetch-users');
+        const response = await fetch('/api/fetch-users');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
