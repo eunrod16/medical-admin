@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser } from './actions';
+import { fetchUsers } from './actions';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
@@ -30,12 +31,8 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/fetch-users');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setPacientes(data);
+        const updatedPacientes = await fetchUsers(); // Implement fetchUsers to get the latest data
+        setPacientes(updatedPacientes);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
