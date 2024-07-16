@@ -79,8 +79,7 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
 
   }
   else{
-    const ListaMedicoEspecialidad = await db.select([medicos.nombre]).from(medicos).where(eq(medicos.especialidad, option));
-
+    const ListaMedicoEspecialidad = await db.select({ nombre: medicos.nombre }).from(medicos).where(eq(medicos.especialidad, option));
   }
   
 
