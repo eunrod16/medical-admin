@@ -59,7 +59,7 @@ export async function deleteUserById(id: number) {
  // await db.delete(users).where(eq(users.id, id));
 }
 
-export async function createPatient(nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+//export async function createPatient(nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
 
   // await db.delete(users).where(eq(users.id, id));
- }
+// }
