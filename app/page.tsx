@@ -3,9 +3,11 @@ import { UsersTable } from './users-table';
 import { Search } from './search';
 import { Form } from './form';
 import { SubmitButton } from './submit-button';
+import { createPatient } from '@/lib/db';
 
 async function register(formData: FormData) {
   'use server';
+  createPatient.bind(null, formData);
   /*let email = formData.get('email') as string;
   let password = formData.get('password') as string;
   let user = await getUser(email);

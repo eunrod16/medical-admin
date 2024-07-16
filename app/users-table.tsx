@@ -12,15 +12,39 @@ import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser } from './actions';
 import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 
-export function UsersTable({
+export function UsersTable({ initialPacientes, offset }: { initialPacientes: SelectUser[]; offset: number | null; }) {
+
+/*export function UsersTable({
   pacientes,
   offset
 }: {
   pacientes: SelectUser[];
   offset: number | null;
-}) {
+}) {*/
   const router = useRouter();
+  const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const updatedPacientes = await fetchUsers(); // Implement fetchUsers to get the latest data
+        setPacientes(updatedPacientes);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Initial data fetch
+    fetchData();
+
+    // Set interval to reload data every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   function onClick() {
     router.replace(`/?offset=${offset}`);
@@ -33,8 +57,8 @@ export function UsersTable({
           <TableHeader>
             <TableRow>
               <TableHead className="max-w-[150px]">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Médico</TableHead>
               <TableHead className="hidden md:table-cell">Estado</TableHead>
+              <TableHead className="hidden md:table-cell">Médico</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>

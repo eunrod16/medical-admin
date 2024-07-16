@@ -22,6 +22,11 @@ const pacientes = pgTable('pacientes', {
 
 export type SelectUser = typeof pacientes.$inferSelect;
 
+export async function fetchUsers() {
+  const moreUsers = await db.select().from(pacientes).orderBy(asc(pacientes.id)).limit(20);
+  return { pacientes: moreUsers };
+}
+
 export async function getUsers(
   search: string,
   offset: number
@@ -53,3 +58,7 @@ export async function getUsers(
 export async function deleteUserById(id: number) {
  // await db.delete(users).where(eq(users.id, id));
 }
+
+export async function createPatient(id: number) {
+  // await db.delete(users).where(eq(users.id, id));
+ }
