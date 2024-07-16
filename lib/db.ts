@@ -35,7 +35,7 @@ export async function getUsers(
       pacientes: await db
         .select()
         .from(pacientes)
-        .where(ilike(pacientes.name, `%${search}%`))
+        .where(ilike(pacientes.nombre, `%${search}%`))
         .limit(1000),
       newOffset: null
     };
