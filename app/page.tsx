@@ -26,7 +26,7 @@ export default async function IndexPage({
 }) {
   const search = searchParams.q ?? '';
   const offset = searchParams.offset ?? 0;
-  const { users, newOffset } = await getUsers(search, Number(offset));
+  const { pacientes, newOffset } = await getUsers(search, Number(offset));
 
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
@@ -36,7 +36,7 @@ export default async function IndexPage({
       <div className="w-full mb-4">
         <Search value={searchParams.q} />
       </div>
-      <UsersTable users={users} offset={newOffset} />
+      <UsersTable pacientes={pacientes} offset={newOffset} />
       <Form action={register}>
           <SubmitButton>Ingresar</SubmitButton>
           <p className="text-center text-sm text-gray-600">
