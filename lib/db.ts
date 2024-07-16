@@ -26,7 +26,7 @@ export async function getUsers(
   search: string,
   offset: number
 ): Promise<{
-  users: SelectUser[];
+  pacientes: SelectUser[];
   newOffset: number | null;
 }> {
   // Always search the full table, not per page
@@ -42,7 +42,7 @@ export async function getUsers(
   }
 
   if (offset === null) {
-    return { users: [], newOffset: null };
+    return { pacientes: [], newOffset: null };
   }
 
   const moreUsers = await db.select().from(pacientes).limit(20).offset(offset);
