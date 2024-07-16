@@ -97,7 +97,7 @@ export function Logo() {
     viewBox="0 0 24 24" 
     xmlns="http://www.w3.org/2000/svg" 
   >
-      <polyline id="secondary" 
+      <polyline 
       points="8 12 10 12 11 9 13 15 14 12 16 12" 
       style="fill: none; stroke: 	rgb(240,128,128); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
         </polyline>
