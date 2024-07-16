@@ -7,14 +7,14 @@ import { createPatient } from '@/lib/db';
 
 async function register(formData: FormData) {
 //  'use server';
-/*  let nombre = formData.get('name') as string;
+  let nombre = formData.get('name') as string;
   let direccion = formData.get('address') as string;
   let telefono = formData.get('phone') as string;
   let email = formData.get('email') as string;
   let option = formData.get('options') as string;
   let edad = formData.get('age') as string;
   await createPatient(nombre,direccion, email, telefono,option,edad );
-*/
+
 
 }
 
