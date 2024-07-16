@@ -25,6 +25,12 @@ export const pacientes = pgTable('pacientes', {
   serial: varchar('serial', { length: 3 }),
 });
 
+export const medicos = pgTable('medicos', {
+  id: serial('id').primaryKey(),
+  nombre: varchar('nombre', { length: 50 }),
+  especialidad: varchar('especialidad', { length: 50 }),
+});
+
 export type SelectUser = typeof pacientes.$inferSelect;
 
 export async function getUsers(
@@ -60,5 +66,23 @@ export async function deleteUserById(id: number) {
 }
 
 export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+  if(option=='MG'){
+    const ListaMedicos = await db.select([medicos.nombre]).from(medicos);
+    const loadMedicos = await db.select({ 
+      nombre: pacientes.medico,
+      count: sql<number>`count(${pacientes.id})`.mapWith(Number)
+  }).from(pacientes)
+      .groupBy(sql`${pacientes.medico}`);
+      //.having(sql`count(${usersTable.id}) > 300`)
+      console.log(ListaMedicos);
+      console.log(loadMedicos);
+
+  }
+  else{
+    const ListaMedicoEspecialidad = await db.select([medicos.nombre]).from(medicos).where(eq(medicos.especialidad, option));
+
+  }
+  
+
   await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: option, edad:edad, telefono: telefono });
 }

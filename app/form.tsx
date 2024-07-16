@@ -123,9 +123,9 @@ export function Form({
           className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         >
           <option value="">Please select an option</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          <option value="MG">Medicina General</option>
+          <option value="MI">Medicina Interna</option>
+          <option value="G">Ginecología</option>
         </select>
       </div>
 
