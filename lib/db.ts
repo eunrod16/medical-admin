@@ -84,7 +84,7 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
   }).from(medicos)
   .leftJoin(pacientes, eq(pacientes.medico, medicos.nombre))
   .where(inArray(medicos.nombre, nombresMedicos))
-  .groupBy(pacientes.medico)
+  .groupBy(medicos.nombre)
   .orderBy(asc(sql`count(${pacientes.id})`))
   .limit(1)
   ;
