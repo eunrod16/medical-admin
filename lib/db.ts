@@ -78,19 +78,21 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
   
   const nombresMedicos = ListaMedicos.map((medico) => medico.nombre).filter((nombre): nombre is string => nombre !== null);
 
+  const result = await db.select().from(users).leftJoin(pets, eq(users.id, pets.ownerId))
 
 
 
   const loadMedicos = await db.select({
-    nombre: pacientes.medico,
+    nombre: medicos.nombres,
     count: sql<number>`count(${pacientes.id})`.mapWith(Number)
-  }).from(pacientes)
-  .where(inArray(pacientes.medico, nombresMedicos))
+  }).from(medicos)
+  .leftJoin(pacientes, eq(pacientes.medico, medicos.nombre))
+  .where(inArray(medicos.nombres, nombresMedicos))
   .groupBy(pacientes.medico)
   .orderBy(asc(sql`count(${pacientes.id})`))
   .limit(1)
   ;
-
+ 
     //.having(sql`count(${usersTable.id}) > 300`)
     console.log(ListaMedicos);
     console.log(loadMedicos);

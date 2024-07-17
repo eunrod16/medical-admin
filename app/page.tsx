@@ -4,9 +4,10 @@ import { Search } from './search';
 import { Form } from './form';
 import { SubmitButton } from './submit-button';
 import { createPatient } from '@/lib/db';
+import React, { useState } from 'react';
 
 async function register(formData: FormData) {
- 'use server';
+  'use server';
   let nombre = formData.get('name') as string;
   let direccion = formData.get('address') as string;
   let telefono = formData.get('phone') as string;
@@ -14,11 +15,8 @@ async function register(formData: FormData) {
   let option = formData.get('options') as string;
   let edad = formData.get('age') as string;
   let serial = formData.get('numero_paciente') as string;
-  await createPatient(serial,nombre,direccion, email, telefono,option,edad );
-
-
+  await createPatient(serial, nombre, direccion, email, telefono, option, edad);
 }
-
 
 export default async function IndexPage({
   searchParams
@@ -29,6 +27,8 @@ export default async function IndexPage({
   const offset = searchParams.offset ?? 0;
   const { pacientes, newOffset } = await getUsers(search, Number(offset));
 
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
       <div className="flex items-center mb-8">
@@ -38,16 +38,27 @@ export default async function IndexPage({
         <Search value={searchParams.q} />
       </div>
       <UsersTable initialPacientes={pacientes} offset={newOffset} />
-      <Form action={register}>
-          <SubmitButton>Ingresar</SubmitButton>
-          <p className="text-center text-sm text-gray-600">
-            {'Already have an account? '}
-            <a href="/login" className="font-semibold text-gray-800">
-              Sign in
-            </a>
-            {' instead.'}
-          </p>
-        </Form>
+      <Form
+        action={async (formData) => {
+          try {
+            await register(formData);
+            setFormStatus('success');
+          } catch {
+            setFormStatus('error');
+          }
+        }}
+      >
+        <SubmitButton>Ingresar</SubmitButton>
+        <p className="text-center text-sm text-gray-600">
+          {'Already have an account? '}
+          <a href="/login" className="font-semibold text-gray-800">
+            Sign in
+          </a>
+          {' instead.'}
+        </p>
+      </Form>
+      {formStatus === 'success' && <p className="text-green-600">Paciente registrado exitosamente!</p>}
+      {formStatus === 'error' && <p className="text-red-600">Hubo un error al registrar el paciente.</p>}
     </main>
   );
 }
