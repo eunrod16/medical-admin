@@ -94,6 +94,13 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
     //.having(sql`count(${usersTable.id}) > 300`)
     console.log(ListaMedicos);
     console.log(loadMedicos);
+    var medicoElegido = ''
+    if(loadMedicos.length =0){
+       medicoElegido = nombresMedicos[0]
+    }
+    else {
+      medicoElegido = loadMedicos[0].nombre
+    }
 
-  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: loadMedicos[0].nombre, edad:edad, telefono: telefono });
+  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono });
 }
