@@ -76,7 +76,10 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
     ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos).where(eq(medicos.especialidad, option));
   }
   
-  const nombresMedicos = ListaMedicos.map((medico) => medico.nombre).filter((nombre) => nombre !== null);
+  const nombresMedicos = ListaMedicos.map((medico) => medico.nombre).filter((nombre): nombre is string => nombre !== null);
+
+
+
 
   const loadMedicos = await db.select({
     nombre: pacientes.medico,
@@ -87,6 +90,7 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
   .orderBy(asc(sql`count(${pacientes.id})`))
   .limit(1)
   ;
+
     //.having(sql`count(${usersTable.id}) > 300`)
     console.log(ListaMedicos);
     console.log(loadMedicos);
