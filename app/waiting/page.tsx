@@ -1,5 +1,5 @@
 import { getUsers } from '@/lib/db';
-import { UsersTable } from './app/paciente-tail';
+import { UsersTable } from 'app/paciente-tail';
 
 
 export default async function IndexPage() {
