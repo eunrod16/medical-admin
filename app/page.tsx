@@ -1,4 +1,4 @@
-// Importa `useState` y otras dependencias al principio del archivo
+'use client';
 import React, { useState } from 'react';
 import { getUsers } from '@/lib/db';
 import { UsersTable } from './users-table';
@@ -7,8 +7,7 @@ import { Form } from './form';
 import { SubmitButton } from './submit-button';
 import { createPatient } from '@/lib/db';
 
-// Añadir 'use client' al principio del archivo para convertir el componente en un Componente de Cliente
-'use client';
+
 
 async function register(formData: FormData) {
   'use server';
