@@ -1,10 +1,5 @@
 import { getUsers } from '@/lib/db';
-import { UsersTable } from './paciente-tail';
-import { Search } from './search';
-import { Form } from './form';
-import { SubmitButton } from './submit-button';
-import { createPatient } from '@/lib/db';
-
+import { UsersTable } from '@/app/paciente-tail';
 
 
 export default async function IndexPage() {
