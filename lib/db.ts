@@ -3,7 +3,7 @@ import 'server-only';
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
-import { eq, ilike,sql } from 'drizzle-orm';
+import { eq, ilike,sql, asc, inArray } from 'drizzle-orm';
 
 
 export const db = drizzle(
@@ -67,21 +67,28 @@ export async function deleteUserById(id: number) {
 }
 
 export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+  var ListaMedicos = []
   if(option=='MG'){
-    const ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos);
-    const loadMedicos = await db.select({
-      nombre: pacientes.medico,
-      count: sql<number>`count(${pacientes.id})`.mapWith(Number)
-    }).from(pacientes).groupBy(pacientes.medico);
-      //.having(sql`count(${usersTable.id}) > 300`)
-      console.log(ListaMedicos);
-      console.log(loadMedicos);
+    ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos);
 
   }
   else{
-    const ListaMedicoEspecialidad = await db.select({ nombre: medicos.nombre }).from(medicos).where(eq(medicos.especialidad, option));
+    ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos).where(eq(medicos.especialidad, option));
   }
   
+  const nombresMedicos = ListaMedicos.map((medico) => medico.nombre);
+  const loadMedicos = await db.select({
+    nombre: pacientes.medico,
+    count: sql<number>`count(${pacientes.id})`.mapWith(Number)
+  }).from(pacientes)
+  .where(inArray(pacientes.medico, nombresMedicos))
+  .groupBy(pacientes.medico)
+  .orderBy(asc(sql`count(${pacientes.id})`))
+  .limit(1)
+  ;
+    //.having(sql`count(${usersTable.id}) > 300`)
+    console.log(ListaMedicos);
+    console.log(loadMedicos);
 
-  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: option, edad:edad, telefono: telefono });
+  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: loadMedicos[0].nombre, edad:edad, telefono: telefono });
 }
