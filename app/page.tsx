@@ -5,6 +5,23 @@ import { Form } from './form';
 import { SubmitButton } from './submit-button';
 import { createPatient } from '@/lib/db';
 
+async function register(formData: FormData) {
+  'use server';
+   let nombre = formData.get('name') as string;
+   let direccion = formData.get('address') as string;
+   let telefono = formData.get('phone') as string;
+   let email = formData.get('email') as string;
+   let option = formData.get('options') as string;
+   let edad = formData.get('age') as string;
+   let numero_pacienteString = formData.get('numero_paciente') as string;
+   let numero_paciente = parseInt(numero_pacienteString, 10);
+   await createPatient(numero_paciente,nombre,direccion, email, telefono,option,edad );
+   let serial = formData.get('numero_paciente') as string;
+   await createPatient(serial,nombre,direccion, email, telefono,option,edad );
+ 
+ 
+ }
+
 export default async function IndexPage({
   searchParams
 }: {
@@ -23,18 +40,7 @@ export default async function IndexPage({
         <Search value={searchParams.q} />
       </div>
       <UsersTable initialPacientes={pacientes} offset={newOffset} />
-      <Form
-        action={async (formData: FormData) => {
-          let nombre = formData.get('name') as string;
-          let direccion = formData.get('address') as string;
-          let telefono = formData.get('phone') as string;
-          let email = formData.get('email') as string;
-          let option = formData.get('options') as string;
-          let edad = formData.get('age') as string;
-          let serial = formData.get('numero_paciente') as string;
-          await createPatient(serial, nombre, direccion, email, telefono, option, edad);
-        }}
-      >
+      <Form action={register}>
         <SubmitButton>Ingresar</SubmitButton>
         <p className="text-center text-sm text-gray-600">
           {'Already have an account? '}
