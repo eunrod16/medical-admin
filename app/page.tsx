@@ -5,21 +5,10 @@ import { UsersTable } from './users-table';
 import { Search } from './search';
 import { Form } from './form';
 import { SubmitButton } from './submit-button';
-import { createPatient } from '@/lib/db';
+
+import { register } from './actions'; 
 
 
-
-async function register(formData: FormData) {
-  'use server';
-  let nombre = formData.get('name') as string;
-  let direccion = formData.get('address') as string;
-  let telefono = formData.get('phone') as string;
-  let email = formData.get('email') as string;
-  let option = formData.get('options') as string;
-  let edad = formData.get('age') as string;
-  let serial = formData.get('numero_paciente') as string;
-  await createPatient(serial, nombre, direccion, email, telefono, option, edad);
-}
 
 export default async function IndexPage({
   searchParams
@@ -52,13 +41,7 @@ export default async function IndexPage({
         }}
       >
         <SubmitButton>Ingresar</SubmitButton>
-        <p className="text-center text-sm text-gray-600">
-          {'Already have an account? '}
-          <a href="/login" className="font-semibold text-gray-800">
-            Sign in
-          </a>
-          {' instead.'}
-        </p>
+
       </Form>
       {formStatus === 'success' && <p className="text-green-600">Paciente registrado exitosamente!</p>}
       {formStatus === 'error' && <p className="text-red-600">Hubo un error al registrar el paciente.</p>}
