@@ -78,10 +78,6 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
   
   const nombresMedicos = ListaMedicos.map((medico) => medico.nombre).filter((nombre): nombre is string => nombre !== null);
 
-  const result = await db.select().from(users).leftJoin(pets, eq(users.id, pets.ownerId))
-
-
-
   const loadMedicos = await db.select({
     nombre: medicos.nombres,
     count: sql<number>`count(${pacientes.id})`.mapWith(Number)
