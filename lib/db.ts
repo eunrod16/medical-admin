@@ -94,9 +94,10 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
     //.having(sql`count(${usersTable.id}) > 300`)
     console.log(ListaMedicos);
     console.log(loadMedicos);
-    var medicoElegido = nombresMedicos[0]
-    if(loadMedicos.length >0){
-       medicoElegido =  loadMedicos[0].nombre 
+    var medicoElegido: string = nombresMedicos[0] ?? ""; 
+
+    if (loadMedicos.length > 0) {
+      medicoElegido = loadMedicos[0].nombre ?? ""; 
     }
  
 
