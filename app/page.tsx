@@ -45,4 +45,6 @@ export default async function IndexPage({
           {' instead.'}
         </p>
       </Form>
-    </main
+    </main>
+  );
+}
