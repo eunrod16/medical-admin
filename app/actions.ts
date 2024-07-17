@@ -27,7 +27,7 @@ export async function fetchTail (){
   */
   
   const tailIds = await db.select({
-    count: sql<number>`min(${pacientes.id})`
+    idMin: sql<number>`min(${pacientes.id})`
   }).from(pacientes)
   .where(eq(pacientes.estado, "En Espera"))
   .groupBy(pacientes.medico);
