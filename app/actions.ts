@@ -2,7 +2,7 @@
 
 import { deleteUserById } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
-import { asc } from 'drizzle-orm';
+import { asc, eq, inArray, sql } from 'drizzle-orm';
 import { db, pacientes } from '@/lib/db';
 
 export async function deleteUser(userId: number) {
@@ -16,3 +16,31 @@ export async function fetchUsers() {
   return { pacientes: moreUsers };
 }
 
+export var pacientesTail = []
+export async function fetchTail (){
+  /*primero select min (paciente.id), paciente.medico
+  group by paciente.medico
+  where estado = En espera
+  
+  select pacientes
+  where id (listaIds)
+  */
+  
+  const tailIds = await db.select({
+    count: sql<number>`min(${pacientes.id})`
+  }).from(pacientes)
+  .where(eq(pacientes.estado, "En Espera"))
+  .groupBy(pacientes.medico);
+  
+  const listaPacientesIds = tailIds.map((paciente) => paciente.idMin);
+  if (listaPacientesIds.length > 0) {
+     pacientesTail = await db.select({
+      nombre: pacientes.nombre,
+      medico: pacientes.medico,
+      estado: pacientes.estado
+    }).from(pacientes)
+    .where(inArray(pacientes.id, listaPacientesIds));
+  }
+  console.log(pacientesTail)
+  return  {pacientesTail: pacientesTail}
+  }

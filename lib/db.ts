@@ -101,3 +101,4 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
 
   await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono });
 }
+

@@ -10,19 +10,13 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
-import { deleteUser, fetchUsers } from './actions';
+import { deleteUser, fetchTail } from './actions';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 export function UsersTable({ initialPacientes, offset }: { initialPacientes: SelectUser[]; offset: number | null; }) {
 
-/*export function UsersTable({
-  pacientes,
-  offset
-}: {
-  pacientes: SelectUser[];
-  offset: number | null;
-}) {*/
+
   const router = useRouter();
   const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
 
@@ -30,7 +24,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { pacientes: updatedPacientes } = await fetchUsers(); // Implement fetchUsers to get the latest data
+        const { pacientesTail: updatedPacientes } = await fetchTail(); // Implement fetchTail to get the latest data
         setPacientes(updatedPacientes);
       } catch (error) {
         console.error('Error fetching data:', error);
