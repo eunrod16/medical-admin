@@ -4,6 +4,7 @@ import { Search } from './search';
 import { Form } from './form';
 import { SubmitButton } from './submit-button';
 import { createPatient } from '@/lib/db';
+import React, { useRef } from 'react';
 
 export default async function IndexPage({
   searchParams
@@ -24,7 +25,7 @@ export default async function IndexPage({
       </div>
       <UsersTable initialPacientes={pacientes} offset={newOffset} />
       <Form
-        action={async (formData) => {
+        action={async (formData: FormData) => {
           let nombre = formData.get('name') as string;
           let direccion = formData.get('address') as string;
           let telefono = formData.get('phone') as string;
@@ -33,6 +34,7 @@ export default async function IndexPage({
           let edad = formData.get('age') as string;
           let serial = formData.get('numero_paciente') as string;
           await createPatient(serial, nombre, direccion, email, telefono, option, edad);
+          const formRef = useRef<HTMLFormElement>(null);
           formRef.current!.reset();
         }}
       >
