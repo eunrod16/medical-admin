@@ -1,8 +1,8 @@
 import { getUsers } from '@/lib/db';
 import { UsersTable } from './users-table';
-import { Search } from './search';
+import { Search } from './admin/search';
 import { Form } from './form';
-import { SubmitButton } from './submit-button';
+import { SubmitButton } from './admin/submit-button';
 import { createPatient } from '@/lib/db';
 
 async function register(formData: FormData) {

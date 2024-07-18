@@ -18,6 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    <html lang="en">
+      <body className="flex min-h-screen w-full flex-col">{children}</body>
+      <Analytics />
+    </html>
+  );
+}
+
+
+/*export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
+  return (
     <html lang="en" className="h-full bg-gray-50">
       <body>
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
@@ -73,4 +87,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+}*/
