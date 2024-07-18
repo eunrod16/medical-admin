@@ -87,7 +87,7 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
           size="sm"
           variant="outline"
           formAction={updatePatientId}
-          disabled
+          
         >
           {nextStatus}
         </Button>
