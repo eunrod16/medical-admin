@@ -16,7 +16,19 @@ export async function fetchUsers() {
   return { pacientes: moreUsers };
 }
 
-export var pacientesTail = []
+export type Paciente = {
+  id: number;
+  nombre: string;
+  estado: string;
+  medico: string;
+  direccion: string;
+  telefono: string;
+  email: string;
+  edad: string;
+  serial: string;
+};
+
+export var pacientesTail: Paciente[] = [];
 export async function fetchTail (){
   /*primero select min (paciente.id), paciente.medico
   group by paciente.medico
