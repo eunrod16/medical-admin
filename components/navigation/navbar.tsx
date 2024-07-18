@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
-import Button from "./Button";
 
 const Navbar = () => {
   return (
@@ -39,7 +38,6 @@ const Navbar = () => {
                   </NavItem>
               </li>
             </ul>
-            <Button />
           </div>
         </div>
       </div>
