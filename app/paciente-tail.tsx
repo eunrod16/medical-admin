@@ -14,7 +14,7 @@ import { deleteUser, fetchTail } from './actions';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
-export function UsersTable({ initialPacientes, offset }: { initialPacientes: SelectUser[]; offset: number | null; }) {
+export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[];  }) {
 
 
   const router = useRouter();
@@ -41,9 +41,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
     return () => clearInterval(intervalId);
   }, []);
 
-  function onClick() {
-    router.replace(`/?offset=${offset}`);
-  }
+
 
   return (
     <>
@@ -64,15 +62,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
           </TableBody>
         </Table>
       </form>
-      {offset !== null && (
-        <Button
-          className="mt-4 w-40"
-          variant="secondary"
-          onClick={() => onClick()}
-        >
-          Next Page
-        </Button>
-      )}
+
     </>
   );
 }
