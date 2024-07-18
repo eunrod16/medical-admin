@@ -70,24 +70,24 @@ function DesktopNav() {
           <span className="sr-only">Acme Inc</span>
         </Link>
 
-        <NavItem href="#" label="Dashboard">
+        <NavItem href="/admin" label="Dashboard">
           <Home className="h-5 w-5" />
+          Ingreso Pacientes
         </NavItem>
 
-        <NavItem href="#" label="Orders">
+        <NavItem href="/admin/waiting" label="Orders">
           <ShoppingCart className="h-5 w-5" />
+          Sala de Espera
         </NavItem>
 
-        <NavItem href="/" label="Products">
+        <NavItem href="/admin/list" label="Products">
           <Package className="h-5 w-5" />
+          Pacientes
         </NavItem>
 
-        <NavItem href="/customers" label="Customers">
+        <NavItem href="/admin/medicos" label="Customers">
           <Users2 className="h-5 w-5" />
-        </NavItem>
-
-        <NavItem href="#" label="Analytics">
-          <LineChart className="h-5 w-5" />
+          Medicos
         </NavItem>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
@@ -127,32 +127,32 @@ function MobileNav() {
             <span className="sr-only">Vercel</span>
           </Link>
           <Link
-            href="#"
+            href="/admin"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <Home className="h-5 w-5" />
-            Dashboard
+            Ingreso Pacientes
           </Link>
           <Link
-            href="#"
+            href="/admin/waiting"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <ShoppingCart className="h-5 w-5" />
-            Orders
+            Sala de Espera
           </Link>
           <Link
-            href="#"
+            href="/admin/list"
             className="flex items-center gap-4 px-2.5 text-foreground"
           >
             <Package className="h-5 w-5" />
-            Products
+            Pacientes
           </Link>
           <Link
             href="#"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <Users2 className="h-5 w-5" />
-            Customers
+            Médicos
           </Link>
           <Link
             href="#"
@@ -168,7 +168,7 @@ function MobileNav() {
 }
 
 function DashboardBreadcrumb() {
-  return (
+  /*return (
     <Breadcrumb className="hidden md:flex">
       <BreadcrumbList>
         <BreadcrumbItem>
@@ -188,5 +188,5 @@ function DashboardBreadcrumb() {
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  );
+  );*/
 }
