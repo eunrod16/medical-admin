@@ -7,9 +7,10 @@ import {
   PanelLeft,
   Settings,
   ShoppingCart,
-  Users2
+  Users2, Armchair, List
 } from 'lucide-react';
 
+import { Logo} from '@/components/icons';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -66,28 +67,24 @@ function DesktopNav() {
           href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs"
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" />
+          <Logo className="h-3 w-3 transition-all group-hover:scale-110" />
           <span className="sr-only">Acme Inc</span>
         </Link>
 
-        <NavItem href="/admin" label="Dashboard">
+        <NavItem href="/admin" label="Ingreso Pacientes">
           <Home className="h-5 w-5" />
-          Ingreso Pacientes
         </NavItem>
 
-        <NavItem href="/admin/waiting" label="Orders">
-          <ShoppingCart className="h-5 w-5" />
-          Sala de Espera
+        <NavItem href="/admin/waiting" label="Sala de Espera">
+          <Armchair className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/admin/list" label="Products">
-          <Package className="h-5 w-5" />
-          Pacientes
+        <NavItem href="/admin/list" label="Pacientes">
+          <List className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/admin/medicos" label="Customers">
+        <NavItem href="/admin/medicos" label="Médicos">
           <Users2 className="h-5 w-5" />
-          Medicos
         </NavItem>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
@@ -137,14 +134,14 @@ function MobileNav() {
             href="/admin/waiting"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
-            <ShoppingCart className="h-5 w-5" />
+            <Armchair className="h-5 w-5" />
             Sala de Espera
           </Link>
           <Link
             href="/admin/list"
             className="flex items-center gap-4 px-2.5 text-foreground"
           >
-            <Package className="h-5 w-5" />
+            <List className="h-5 w-5" />
             Pacientes
           </Link>
           <Link
