@@ -41,7 +41,7 @@ export function UsersTable({
           </TableHeader>
           <TableBody>
             {pacientes.map((paciente) => (
-              <UserRow key={paciente.id} paciente={paciente} />
+              <UserRow key={paciente.id} paciente={paciente} search={search} />
             ))}
           </TableBody>
         </Table>
@@ -59,7 +59,7 @@ export function UsersTable({
   );
 }
 
-function UserRow({ paciente }: { paciente: SelectUser }) {
+function UserRow({ paciente, search }: { paciente: SelectUser, search:string }) {
   const pacienteId = paciente.id;
   const Currentstatus = paciente.estado;
   var nextStatus = 'En Espera'
