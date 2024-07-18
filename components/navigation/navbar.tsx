@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
-import { NavItem } from './nav-item';
+import { NavItem } from 'app/nav-item';
 
 const Navbar = () => {
   return (
