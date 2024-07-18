@@ -3,7 +3,12 @@ import Link from "next/link";
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
 import { NavItem } from 'app/nav-item';
 
-const Navbar = () => {
+interface NavbarProps {
+  toggle: () => void;
+}
+
+
+const Navbar = ({ toggle }: NavbarProps) => {
   return (
     <>
       <div className="w-full h-20 bg-emerald-800 sticky top-0">
