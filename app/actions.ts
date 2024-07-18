@@ -17,15 +17,9 @@ export async function fetchUsers() {
 }
 
 export type Paciente = {
-  id: number;
   nombre: string;
   estado: string;
   medico: string;
-  direccion: string;
-  telefono: string;
-  email: string;
-  edad: string;
-  serial: string;
 };
 
 export var pacientesTail: Paciente[] = [];
