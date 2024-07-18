@@ -35,8 +35,8 @@ export default function RootLayout({
               <div className="flex-1 overflow-auto py-2">
                 <nav className="grid items-start px-4 text-sm font-medium">
                   <NavItem href="/">
-                    <UsersIcon className="h-4 w-4" />
-                    Pacientes
+                    <RegisterIcon className="h-4 w-4" />
+                    Ingreso
                   </NavItem>
                   <NavItem href="/waiting">
                     <WaitingIcon className="h-4 w-4" />
@@ -45,6 +45,10 @@ export default function RootLayout({
                   <NavItem href="/waiting">
                     <DoctorIcon className="h-4 w-4" />
                     Médicos
+                  </NavItem>
+                  <NavItem href="/list">
+                    <DoctorIcon className="h-4 w-4" />
+                    Pacientes
                   </NavItem>
 
                 </nav>

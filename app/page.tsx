@@ -33,10 +33,7 @@ export default async function IndexPage({
       <div className="flex items-center mb-8">
         <h1 className="font-semibold text-lg md:text-2xl">Ingreso de Pacientes</h1>
       </div>
-      <div className="w-full mb-4">
-        <Search value={searchParams.q} />
-      </div>
-      <UsersTable initialPacientes={pacientes} offset={newOffset} />
+
       <Form action={register}>
         <SubmitButton>Ingresar</SubmitButton>
         <p className="text-center text-sm text-gray-600">
