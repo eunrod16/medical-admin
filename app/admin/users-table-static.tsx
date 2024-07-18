@@ -11,7 +11,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser, updatePatient } from './actions';
-import { useRouter, revalidatePath } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 export function UsersTable({
   pacientes,
