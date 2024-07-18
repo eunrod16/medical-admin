@@ -1,5 +1,5 @@
 import { getUsers } from '@/lib/db';
-import { UsersTable } from 'app/users-table';
+import { UsersTable } from 'app/admin/users-table';
 import { Search } from 'app/admin/search';
 
 

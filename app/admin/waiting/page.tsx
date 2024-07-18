@@ -1,5 +1,5 @@
 import { simpleUsers } from '@/lib/db';
-import { UsersTable } from 'app/paciente-tail';
+import { UsersTable } from 'app/admin/paciente-tail';
 
 
 
