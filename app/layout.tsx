@@ -1,6 +1,5 @@
-'use client';
+// app/layout.tsx
 import './globals.css';
-
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
@@ -8,10 +7,7 @@ import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/compon
 import { User } from './user';
 import { NavItem } from './nav-item';
 
-export const metadata = {
-  title: 'Medical Admin',
-  description: 'A user admin medical configured with Next.js, Postgres, NextAuth, Tailwind CSS, TypeScript, and Prettier.'
-};
+export { metadata } from './metadata';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
