@@ -34,6 +34,15 @@ export const medicos = pgTable('medicos', {
 
 export type SelectUser = typeof pacientes.$inferSelect;
 
+
+export async function simpleUsers(): Promise<{
+  pacientes: SelectUser[];
+}> {
+
+  const moreUsers = await db.select().from(pacientes).limit(5);
+  return { pacientes: moreUsers };
+}
+
 export async function getUsers(
   search: string,
   offset: number
