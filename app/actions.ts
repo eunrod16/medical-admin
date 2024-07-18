@@ -18,7 +18,7 @@ export async function fetchUsers() {
 
 
 
-export var pacientesTail: Paciente[] = [];
+ var pacientesTail: Paciente[] = [];
 export async function fetchTail (){
   /*primero select min (paciente.id), paciente.medico
   group by paciente.medico
