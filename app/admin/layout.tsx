@@ -83,7 +83,7 @@ function DesktopNav() {
           <List className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/admin/medicos" label="Médicos">
+        <NavItem href="/admin/doctors" label="Médicos">
           <Users2 className="h-5 w-5" />
         </NavItem>
       </nav>
@@ -145,19 +145,13 @@ function MobileNav() {
             Pacientes
           </Link>
           <Link
-            href="#"
+            href="/admin/doctors"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <Users2 className="h-5 w-5" />
             Médicos
           </Link>
-          <Link
-            href="#"
-            className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-          >
-            <LineChart className="h-5 w-5" />
-            Settings
-          </Link>
+
         </nav>
       </SheetContent>
     </Sheet>
