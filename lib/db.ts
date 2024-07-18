@@ -3,7 +3,7 @@ import 'server-only';
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
-import { eq, ilike,sql, asc, inArray,ne } from 'drizzle-orm';
+import { eq, ilike,sql, asc, inArray,ne, and } from 'drizzle-orm';
 
 
 export const db = drizzle(
@@ -69,8 +69,12 @@ export async function getUsers(
       pacientes: await db
         .select()
         .from(pacientes)
-        .where(ilike(pacientes.medico, `%${search}%`))
-        .where(ne(pacientes.estado, 'Finalizado'))
+        .where(
+          and(
+            ilike(pacientes.medico, `%${search}%`),
+            ne(pacientes.estado, 'Finalizado')
+          )
+        )
         .limit(1000),
       newOffset: null
     };
