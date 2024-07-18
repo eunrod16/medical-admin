@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
-import { User } from './user';
+//import { User } from './user';
 import { NavItem } from './nav-item';
 
 import { metadata } from './metadata'; // Import the metadata but do not export it
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Logo />
                 <span className="">Medical Admin</span>
               </Link>
-              <User />
+  
             </header>
             {children}
           </div>
