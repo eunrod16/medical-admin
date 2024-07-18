@@ -3,7 +3,7 @@ import 'server-only';
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
-import { eq, ilike,sql, asc, inArray } from 'drizzle-orm';
+import { eq, ilike,sql, asc, inArray,ne } from 'drizzle-orm';
 
 
 export const db = drizzle(
@@ -51,7 +51,7 @@ export async function simpleUsers(): Promise<{
   pacientes: SelectUser[];
 }> {
 
-  const moreUsers = await db.select().from(pacientes).limit(5);
+  const moreUsers = await db.select().from(pacientes).orderBy(pacientes.id).limit(5);
   return { pacientes: moreUsers };
 }
 
@@ -70,6 +70,7 @@ export async function getUsers(
         .select()
         .from(pacientes)
         .where(ilike(pacientes.medico, `%${search}%`))
+        .where(ne(pacientes.estado, 'Finalizado'))
         .limit(1000),
       newOffset: null
     };
@@ -79,7 +80,7 @@ export async function getUsers(
     return { pacientes: [], newOffset: null };
   }
 
-  const moreUsers = await db.select().from(pacientes).limit(20).offset(offset);
+  const moreUsers = await db.select().from(pacientes).orderBy(pacientes.id).limit(20).offset(offset);
   const newOffset = moreUsers.length >= 20 ? offset + 20 : null;
   return { pacientes: moreUsers, newOffset };
 }

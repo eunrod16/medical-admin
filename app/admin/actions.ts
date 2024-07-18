@@ -39,7 +39,7 @@ export async function fetchTail (){
   const tailIds = await db.select({
     idMin: sql<number>`min(${pacientes.id})`
   }).from(pacientes)
-  .where(eq(pacientes.estado, "En Espera"))
+  .where(eq(pacientes.estado, "Atender"))
   .groupBy(pacientes.medico);
   
   const listaPacientesIds = tailIds.map((paciente) => paciente.idMin);
@@ -55,7 +55,8 @@ export async function fetchTail (){
       edad: pacientes.edad ?? '',
       serial: pacientes.serial ?? ''
     }).from(pacientes)
-    .where(inArray(pacientes.id, listaPacientesIds));
+    .where(inArray(pacientes.id, listaPacientesIds))
+    .orderBy(pacientes.id);
   }
   console.log(pacientesTail)
   return  {pacientesTail: pacientesTail}
