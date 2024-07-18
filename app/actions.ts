@@ -3,7 +3,7 @@
 import { deleteUserById } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { asc, eq, inArray, sql } from 'drizzle-orm';
-import { db, pacientes } from '@/lib/db';
+import { db, pacientes, Paciente } from '@/lib/db';
 
 export async function deleteUser(userId: number) {
   // Uncomment this to enable deletion
@@ -16,17 +16,7 @@ export async function fetchUsers() {
   return { pacientes: moreUsers };
 }
 
-export type Paciente = {
-  id: number;
-  nombre: string | null;
-  estado: string | null;
-  medico: string | null;
-  direccion: string | null;
-  telefono: string | null;
-  email: string | null;
-  edad: string | null;
-  serial: string | null;
-};
+
 
 export var pacientesTail: Paciente[] = [];
 export async function fetchTail (){
