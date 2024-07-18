@@ -2,7 +2,7 @@ import './globals.css';
 
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/react';
-import { Logo, WaitingIcon, UsersIcon, DoctorIcon } from '@/components/icons';
+import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
 import { User } from './user';
 import { NavItem } from './nav-item';
 
@@ -47,7 +47,7 @@ export default function RootLayout({
                     Médicos
                   </NavItem>
                   <NavItem href="/list">
-                    <DoctorIcon className="h-4 w-4" />
+                    <UsersIcon className="h-4 w-4" />
                     Pacientes
                   </NavItem>
 
