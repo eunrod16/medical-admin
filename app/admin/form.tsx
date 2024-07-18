@@ -25,19 +25,19 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
       </div>
       <div>
         <label htmlFor="age" className="block text-xs text-gray-600 uppercase">Edad</label>
-        <input id="age" name="age" type="number" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="age" name="age" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="phone" className="block text-xs text-gray-600 uppercase">Teléfono</label>
-        <input id="phone" name="phone" type="number" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="phone" name="phone" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="email" className="block text-xs text-gray-600 uppercase">Correo Electrónico</label>
-        <input id="email" name="email" type="email" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="email" name="email" type="email"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="address" className="block text-xs text-gray-600 uppercase">Dirección</label>
-        <input id="address" name="address" type="text" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="address" name="address" type="text"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="options" className="block text-xs text-gray-600 uppercase">Médico Seleccionado</label>

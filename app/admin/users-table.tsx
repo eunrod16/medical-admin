@@ -60,7 +60,6 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
               <TableHead className="max-w-[150px]">Name</TableHead>
               <TableHead className="hidden md:table-cell">Estado</TableHead>
               <TableHead className="hidden md:table-cell">Médico</TableHead>
-              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -92,17 +91,6 @@ function UserRow({ paciente }: { paciente: SelectUser }) {
       <TableCell className="font-medium">{paciente.nombre}</TableCell>
       <TableCell className="hidden md:table-cell">{paciente.estado}</TableCell>
       <TableCell>{paciente.medico}</TableCell>
-      <TableCell>
-        <Button
-          className="w-full"
-          size="sm"
-          variant="outline"
-          formAction={deleteUserWithId}
-          disabled
-        >
-          Delete
-        </Button>
-      </TableCell>
     </TableRow>
   );
 }

@@ -1,5 +1,5 @@
 'use client';
-
+import { useEffect } from 'react';
 import {
   TableHead,
   TableRow,
@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser, updatePatient } from './actions';
-import { useRouter } from 'next/navigation';
+import { useRouter, revalidatePath } from 'next/navigation';
 
 export function UsersTable({
   pacientes,
@@ -22,6 +22,13 @@ export function UsersTable({
   search: string | null;
 }) {
   const router = useRouter();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      var paramSearch = ''
+      if (search!= null) paramSearch = search
+      revalidatePath('/admin/doctors?q='.concat(paramSearch));
+    }, 20000); // 20 segundos
 
   function onClick() {
     router.replace(`/?offset=${offset}`);
