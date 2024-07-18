@@ -2,10 +2,9 @@ import './globals.css';
 
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/react';
-import { Logo, WaitingIcon, UsersIcon, DoctorIcon } from '@/components/icons';
+import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
 import { User } from './user';
 import { NavItem } from './nav-item';
-import { Button } from '@/components/ui/button';
 
 export const metadata = {
   title: 'Medical Admin',
@@ -18,12 +17,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body>
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
-          <div className=" border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
+          <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
             <div className="flex h-full max-h-screen flex-col gap-2">
               <div className="flex h-[60px] items-center border-b px-5">
                 <Link
@@ -49,7 +47,7 @@ export default function RootLayout({
                     Médicos
                   </NavItem>
                   <NavItem href="/list">
-                    <DoctorIcon className="h-4 w-4" />
+                    <UsersIcon className="h-4 w-4" />
                     Pacientes
                   </NavItem>
 
@@ -58,6 +56,16 @@ export default function RootLayout({
             </div>
           </div>
           <div className="flex flex-col">
+            <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 justify-between lg:justify-end">
+              <Link
+                className="flex items-center gap-2 font-semibold lg:hidden"
+                href="/"
+              >
+                <Logo />
+                <span className="">Medical Admin</span>
+              </Link>
+              <User />
+            </header>
             {children}
           </div>
         </div>
@@ -66,4 +74,3 @@ export default function RootLayout({
     </html>
   );
 }
-
