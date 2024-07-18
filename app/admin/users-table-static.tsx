@@ -75,7 +75,16 @@ function UserRow({ paciente }: { paciente: SelectUser }) {
           formAction={deleteUserWithId}
           disabled
         >
-          Delete
+          Atender
+        </Button>
+        <Button
+          className="w-full"
+          size="sm"
+          variant="outline"
+          formAction={deleteUserWithId}
+          disabled
+        >
+          Finalizar
         </Button>
       </TableCell>
     </TableRow>
