@@ -74,7 +74,7 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
   }
   const deleteUserWithId = deleteUser.bind(null, pacienteId);
 
-  const updatePatientId = updatePatient.bind( pacienteId, search,nextStatus );
+  const updatePatientId = updatePatient.bind( null, pacienteId, search,nextStatus );
 
   return (
     <TableRow>
