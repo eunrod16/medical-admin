@@ -30,6 +30,9 @@ export function UsersTable({
       revalidatePath('/admin/doctors?q='.concat(paramSearch));
     }, 20000); // 20 segundos
 
+    return () => clearInterval(intervalId);
+  }, []);
+
   function onClick() {
     router.replace(`/?offset=${offset}`);
   }
