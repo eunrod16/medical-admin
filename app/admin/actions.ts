@@ -4,6 +4,7 @@ import { deleteUserById, updateStatusbyId } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { asc, eq, inArray, sql } from 'drizzle-orm';
 import { db, pacientes, Paciente } from '@/lib/db';
+import { serialize } from 'v8';
 
 export async function deleteUser(userId: number) {
   // Uncomment this to enable deletion
@@ -11,9 +12,11 @@ export async function deleteUser(userId: number) {
   // revalidatePath('/');
 }
 
-export async function updatePatient(id: number, search:string, status:string) {
+export async function updatePatient(id: number, search:string|null, status:string) {
+  var paramSearch = ''
+  if (search!= null) paramSearch = search
    await updateStatusbyId(id, status);
-   revalidatePath('/admin/doctors?q='.concat(search));
+   revalidatePath('/admin/doctors?q='.concat(paramSearch));
 }
 
 export async function fetchUsers() {
