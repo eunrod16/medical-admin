@@ -1,35 +1,21 @@
-'use client';
 import './globals.css';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
 import { User } from './user';
 import { NavItem } from './nav-item';
+import { metadata } from './metadata';
+import MobileMenu from './mobile-menu';
 
-export { metadata } from './metadata';
+export { metadata };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isMobileMenuOpen]);
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body>
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
-          <div className={`fixed inset-0 z-50 bg-gray-800/70 lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`} onClick={toggleMobileMenu}></div>
-          <div className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-gray-100/40 dark:bg-gray-800/40 lg:static lg:translate-x-0 transition-transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <MobileMenu />
+          <div className="hidden lg:block border-r bg-gray-100/40 dark:bg-gray-800/40">
             <div className="flex h-full max-h-screen flex-col gap-2">
               <div className="flex h-[60px] items-center border-b px-5">
                 <Link className="flex items-center gap-2 font-semibold" href="/">
@@ -63,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 justify-between lg:justify-end">
               <button
                 className="lg:hidden"
-                onClick={toggleMobileMenu}
+                onClick={() => document.getElementById('mobileMenu')!.classList.toggle('hidden')}
                 aria-label="Toggle mobile menu"
               >
                 <svg
