@@ -68,7 +68,7 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
      break;
     case  'Atender' : nextStatus = 'En Consulta';
      break;
-    case  'En Consulta' : nextStatus = 'Finalizar';
+    case  'En Consulta' : nextStatus = 'Finalizado';
      break;
 
   }
