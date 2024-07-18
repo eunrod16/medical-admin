@@ -75,7 +75,8 @@ export async function getUsers(
             ne(pacientes.estado, 'Finalizado')
           )
         )
-        .limit(1000),
+        .limit(1000)
+        .orderBy(pacientes.id),
       newOffset: null
     };
   }
