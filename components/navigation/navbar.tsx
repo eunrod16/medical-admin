@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Logo from "./Logo";
+import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
 import Button from "./Button";
 
 const Navbar = () => {
