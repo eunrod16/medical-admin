@@ -17,9 +17,15 @@ export async function fetchUsers() {
 }
 
 export type Paciente = {
+  id: number;
   nombre: string | null;
   estado: string | null;
   medico: string | null;
+  direccion: string | null;
+  telefono: string | null;
+  email: string | null;
+  edad: string | null;
+  serial: string | null;
 };
 
 export var pacientesTail: Paciente[] = [];
