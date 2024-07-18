@@ -59,7 +59,7 @@ export function UsersTable({
   );
 }
 
-function UserRow({ paciente, search }: { paciente: SelectUser, search:string }) {
+function UserRow({ paciente, search }: { paciente: SelectUser, search:string|null }) {
   const pacienteId = paciente.id;
   const Currentstatus = paciente.estado;
   var nextStatus = 'En Espera'
