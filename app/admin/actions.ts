@@ -1,6 +1,6 @@
 'use server';
 
-import { deleteUserById } from '@/lib/db';
+import { deleteUserById, updateStatusbyId } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { asc, eq, inArray, sql } from 'drizzle-orm';
 import { db, pacientes, Paciente } from '@/lib/db';
@@ -9,6 +9,11 @@ export async function deleteUser(userId: number) {
   // Uncomment this to enable deletion
   // await deleteUserById(userId);
   // revalidatePath('/');
+}
+
+export async function updatePatient(id: number, search:string, status:string) {
+   await updateStatusbyId(id, status);
+   revalidatePath('/admin/doctors?q='.concat(search));
 }
 
 export async function fetchUsers() {

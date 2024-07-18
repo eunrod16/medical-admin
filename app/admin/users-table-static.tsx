@@ -10,15 +10,16 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
-import { deleteUser } from './actions';
+import { deleteUser, updatePatient } from './actions';
 import { useRouter } from 'next/navigation';
 
 export function UsersTable({
   pacientes,
-  offset
+  offset, search
 }: {
   pacientes: SelectUser[];
   offset: number | null;
+  search: string | null;
 }) {
   const router = useRouter();
 
@@ -60,7 +61,20 @@ export function UsersTable({
 
 function UserRow({ paciente }: { paciente: SelectUser }) {
   const pacienteId = paciente.id;
+  const Currentstatus = paciente.estado;
+  var nextStatus = 'En Espera'
+  switch (Currentstatus) {
+    case  'En Espera' : nextStatus = 'Atender';
+     break;
+    case  'Atender' : nextStatus = 'En Consulta';
+     break;
+    case  'En Consulta' : nextStatus = 'Finalizar';
+     break;
+
+  }
   const deleteUserWithId = deleteUser.bind(null, pacienteId);
+
+  const updatePatientId = updatePatient.bind( pacienteId, search,nextStatus );
 
   return (
     <TableRow>
@@ -72,20 +86,12 @@ function UserRow({ paciente }: { paciente: SelectUser }) {
           className="w-full"
           size="sm"
           variant="outline"
-          formAction={deleteUserWithId}
+          formAction={updatePatientId}
           disabled
         >
-          Atender
+          {nextStatus}
         </Button>
-        <Button
-          className="w-full"
-          size="sm"
-          variant="outline"
-          formAction={deleteUserWithId}
-          disabled
-        >
-          Finalizar
-        </Button>
+
       </TableCell>
     </TableRow>
   );

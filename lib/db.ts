@@ -69,7 +69,7 @@ export async function getUsers(
       pacientes: await db
         .select()
         .from(pacientes)
-        .where(ilike(pacientes.nombre, `%${search}%`))
+        .where(ilike(pacientes.medico, `%${search}%`))
         .limit(1000),
       newOffset: null
     };
@@ -86,6 +86,12 @@ export async function getUsers(
 
 export async function deleteUserById(id: number) {
  // await db.delete(users).where(eq(users.id, id));
+}
+
+export async function updateStatusbyId (id: number, status:string){
+  await db.update(pacientes)
+  .set({ estado: status })
+  .where(eq(pacientes.id, id));
 }
 
 export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
