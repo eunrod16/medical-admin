@@ -63,6 +63,7 @@ export async function getUsers(
   newOffset: number | null;
 }> {
   // Always search the full table, not per page
+  console.log(search)
   if (search) {
     return {
       pacientes: await db
