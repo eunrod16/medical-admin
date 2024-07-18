@@ -3,8 +3,8 @@ import './globals.css';
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/react';
 import { Logo, WaitingIcon, UsersIcon, DoctorIcon, RegisterIcon } from '@/components/icons';
-import { User } from './user';
-import { NavItem } from './nav-item';
+//import { User } from './admin/user';
+//import { NavItem } from './admin/nav-item';
 
 export const metadata = {
   title: 'Medical Admin',
