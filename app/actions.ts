@@ -47,9 +47,15 @@ export async function fetchTail (){
   const listaPacientesIds = tailIds.map((paciente) => paciente.idMin);
   if (listaPacientesIds.length > 0) {
      pacientesTail = await db.select({
-      nombre: pacientes.nombre,
-      medico: pacientes.medico,
-      estado: pacientes.estado
+      id: pacientes.id,
+      nombre: pacientes.nombre ?? '',
+      medico: pacientes.medico ?? '',
+      estado: pacientes.estado ?? '',
+      direccion: pacientes.direccion ?? '',
+      telefono: pacientes.telefono ?? '',
+      email: pacientes.email ?? '',
+      edad: pacientes.edad ?? '',
+      serial: pacientes.serial ?? ''
     }).from(pacientes)
     .where(inArray(pacientes.id, listaPacientesIds));
   }
