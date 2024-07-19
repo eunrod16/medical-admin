@@ -1,3 +1,4 @@
+'use client';
 import { getUsers } from '@/lib/db';
 import { UsersTable } from 'app/admin/users-table-static';
 import { Search } from 'app/admin/search';
