@@ -9,43 +9,19 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
-import { deleteUser, updatePatient, reloadgetUsers } from './actions';
+import { deleteUser, updatePatient } from './actions';
 import { useRouter } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
-import { revalidatePath } from 'next/cache';
 
 export function UsersTable({
-  initialPacientes,
+  pacientes,
   offset, search
 }: {
-  initialPacientes: SelectUser[];
+  pacientes: SelectUser[];
   offset: number | null;
   search: string | null;
 }) {
   const router = useRouter();
-  const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { pacientes: updatedPacientes } = await reloadgetUsers(search); // Implement fetchUsers to get the latest data
-        setPacientes(updatedPacientes);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    // Initial data fetch
-    fetchData();
-
-    // Set interval to reload data every 10 seconds 10000
-    const intervalId = setInterval(fetchData, 10000);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
-
+  
 
   function onClick() {
     router.replace(`/?offset=${offset}`);
