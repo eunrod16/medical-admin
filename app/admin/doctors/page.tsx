@@ -1,7 +1,8 @@
 import { getUsers } from '@/lib/db';
 import { UsersTable } from 'app/admin/users-table-static';
 import { Search } from 'app/admin/search';
-
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 
 
@@ -13,6 +14,15 @@ export default async function IndexPage({
   const search = searchParams.q ?? '';
   const offset = searchParams.offset ?? 0;
   const { pacientes, newOffset } = await getUsers(search, Number(offset));
+  const router = useRouter();
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Esto forzará la revalidación de la página actual
+      router.replace(router.asPath);
+    }, 10000); // 10 segundos
+
+    return () => clearInterval(intervalId);
+  }, [router]);
 
 
   return (
