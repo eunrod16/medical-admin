@@ -1,6 +1,6 @@
 'use server';
 
-import { deleteUserById, updateStatusbyId } from '@/lib/db';
+import { deleteUserById, updateStatusbyId, getUsers } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { asc, eq, inArray, sql } from 'drizzle-orm';
 import { db, pacientes, Paciente } from '@/lib/db';
@@ -22,6 +22,14 @@ export async function updatePatient(id: number, search:string|null, status:strin
 export async function fetchUsers() {
   const moreUsers = await db.select().from(pacientes).orderBy(asc(pacientes.id)).limit(20);
   return { pacientes: moreUsers };
+}
+
+export async function reloadgetUsers(q: string| null){
+  var search =''
+  if (q != null) search = q
+  const offset = 0
+  const { pacientes, newOffset } = await getUsers(search, Number(offset));
+  return {pacientes:pacientes}
 }
 
 
