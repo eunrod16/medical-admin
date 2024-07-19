@@ -10,7 +10,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser, updatePatient } from './actions';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export function UsersTable({
   pacientes,
@@ -21,10 +23,19 @@ export function UsersTable({
   search: string | null;
 }) {
   const router = useRouter();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Esto forzará la revalidación de la página actual
+      router.replace(router.asPath);
+    }, 10000); // 10 segundos
+
+    return () => clearInterval(intervalId);
+  }, [router]);
   
 
   function onClick() {
-    router.replace(`/?offset=${offset}`);
+   // router.replace(`/?offset=${offset}`);
   }
 
   return (
