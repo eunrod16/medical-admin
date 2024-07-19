@@ -10,9 +10,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { SelectUser } from '@/lib/db';
 import { deleteUser, updatePatient } from './actions';
-//import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 export function UsersTable({
   pacientes,
@@ -27,7 +26,7 @@ export function UsersTable({
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Esto forzará la revalidación de la página actual
-      router.replace(router.asPath);
+      window.location.reload();
     }, 10000); // 10 segundos
 
     return () => clearInterval(intervalId);
