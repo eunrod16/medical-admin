@@ -45,7 +45,7 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
       </div>
       <div>
         <label htmlFor="temperature" className="block text-xs text-gray-600 uppercase">Temperatura axilar (C°) ej 37.6</label>
-        <input id="temperature" name="temperature" type="number"  step=0.01 className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="temperature" name="temperature" type="number"  step="0.01" className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="pulse" className="block text-xs text-gray-600 uppercase">Pulso (lat/min) ej. 88</label>
