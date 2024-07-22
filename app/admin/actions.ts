@@ -61,7 +61,11 @@ export async function fetchTail (){
       telefono: pacientes.telefono ?? '',
       email: pacientes.email ?? '',
       edad: pacientes.edad ?? '',
-      serial: pacientes.serial ?? ''
+      serial: pacientes.serial ?? '',
+      peso: pacientes.peso ?? '',
+      pulso: pacientes.pulso ?? '',
+      temperatura: pacientes.temperatura ?? '',
+      presion: pacientes.presion ?? ''
     }).from(pacientes)
     .where(inArray(pacientes.id, listaPacientesIds))
     .orderBy(pacientes.id);

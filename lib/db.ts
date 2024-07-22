@@ -24,6 +24,10 @@ export const pacientes = pgTable('pacientes', {
   email: varchar('email', { length: 100 }),
   edad: varchar('edad', { length: 3 }),
   serial: varchar('serial', { length: 3 }),
+  pulso: varchar('pulso', { length: 10 }),
+  presion: varchar('presion', { length: 3 }),
+  temperatura: varchar('temperatura', { length: 3 }),
+  peso: varchar('peso', { length: 3 })
 });
 
 export const medicos = pgTable('medicos', {
@@ -42,9 +46,16 @@ export type Paciente = {
   email: string | null;
   edad: string | null;
   serial: string | null;
+  pulso: string | null;
+  presion: string | null;
+  temperatura: string | null;
+  peso: string | null;
 };
 
 export type SelectUser = typeof pacientes.$inferSelect;
+
+
+
 
 
 export async function simpleUsers(): Promise<{
@@ -53,6 +64,23 @@ export async function simpleUsers(): Promise<{
 
   const moreUsers = await db.select().from(pacientes).orderBy(pacientes.id).limit(5);
   return { pacientes: moreUsers };
+}
+
+export async function getUserbyId(
+  id: number
+): Promise<{ paciente: SelectUser | null }> {
+  if (id) {
+    const result = await db
+      .select()
+      .from(pacientes)
+      .where(eq(pacientes.id, id));
+
+    return {
+      paciente: result.length > 0 ? result[0] : null
+    };
+  } else {
+    return { paciente: null };
+  }
 }
 
 export async function getUsers(
@@ -114,7 +142,7 @@ export async function updateStatusbyId (id: number, status:string){
   .where(eq(pacientes.id, id));
 }
 
-export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string) {
+export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string, presion:string, pulso:string, peso:string, temperatura:string) {
   var ListaMedicos = []
   if(option=='MG'){
     ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos);
@@ -147,6 +175,6 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
     }
  
 
-  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono });
+  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono, presion:presion, pulso:pulso, peso:peso, temperatura:temperatura });
 }
 

@@ -12,6 +12,7 @@ import { SelectUser } from '@/lib/db';
 import { deleteUser, updatePatient } from './actions';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 export function UsersTable({
   pacientes,
@@ -101,6 +102,12 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
         >
           {nextStatus}
         </Button>
+        <Link
+          href="/admin/info?id={pacienteId}"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+        >
+          <span className="sr-only">Ver información</span>
+        </Link>
 
       </TableCell>
     </TableRow>

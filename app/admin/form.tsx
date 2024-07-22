@@ -40,6 +40,22 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
         <input id="address" name="address" type="text"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
+        <label htmlFor="presion" className="block text-xs text-gray-600 uppercase">Presión Arterial (mmHg) ej. 120/80</label>
+        <input id="presion" name="presion" type="text" pattern="\d{2,3}/\d{2,3}"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+      </div>
+      <div>
+        <label htmlFor="temperature" className="block text-xs text-gray-600 uppercase">Temperatura axilar (C°) ej 37.6</label>
+        <input id="temperature" name="temperature" type="number"  step=0.01 className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+      </div>
+      <div>
+        <label htmlFor="pulse" className="block text-xs text-gray-600 uppercase">Pulso (lat/min) ej. 88</label>
+        <input id="pulse" name="pulse" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+      </div>
+      <div>
+        <label htmlFor="weight" className="block text-xs text-gray-600 uppercase">Peso (kg) ej. 44</label>
+        <input id="weight" name="weight" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+      </div>
+      <div>
         <label htmlFor="options" className="block text-xs text-gray-600 uppercase">Médico Seleccionado</label>
         <select id="options" name="options" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black">
           <option value="">Please select an option</option>
