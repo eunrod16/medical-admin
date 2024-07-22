@@ -80,6 +80,20 @@ export async function getUsers(
       newOffset: null
     };
   }
+  else {
+    return {
+      pacientes: await db
+        .select()
+        .from(pacientes)
+        .where(
+            ne(pacientes.estado, 'Finalizado')
+        )
+        .limit(1000)
+        .orderBy(pacientes.id),
+      newOffset: null
+    };
+
+  }
 
   if (offset === null) {
     return { pacientes: [], newOffset: null };

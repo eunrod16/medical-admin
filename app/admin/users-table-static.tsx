@@ -44,8 +44,8 @@ export function UsersTable({
           <TableHeader>
             <TableRow>
               <TableHead className="max-w-[150px]">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Médico</TableHead>
               <TableHead className="hidden md:table-cell">Estado</TableHead>
+              <TableHead className="hidden md:table-cell">Médico</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
@@ -72,7 +72,7 @@ export function UsersTable({
 function UserRow({ paciente, search }: { paciente: SelectUser, search:string|null }) {
   const pacienteId = paciente.id;
   const Currentstatus = paciente.estado;
-  var nextStatus = 'En Espera'
+  var nextStatus = ''
   switch (Currentstatus) {
     case  'En Espera' : nextStatus = 'Atender';
      break;
