@@ -34,8 +34,9 @@ export async function reloadgetUsers(q: string| null){
 
 
 
- var pacientesTail: Paciente[] = [];
+
 export async function fetchTail (){
+  var pacientesTail: Paciente[] = [];
   /*primero select min (paciente.id), paciente.medico
   group by paciente.medico
   where estado = En espera
