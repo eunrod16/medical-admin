@@ -103,10 +103,10 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
           {nextStatus}
         </Button>
         <Link
-          href="/admin/info?id={pacienteId}"
+          href={`/admin/info?id=${pacienteId}`}
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <span className="sr-only">Ver información</span>
+          <span>Ver información</span>
         </Link>
 
       </TableCell>
