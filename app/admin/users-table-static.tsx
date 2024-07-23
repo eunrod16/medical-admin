@@ -108,7 +108,7 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
          
           className="inline-flex justify-center items-center rounded-full border px-2.5 py-0.5 font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 w-full"
         >
-          <span style={{position: "absolute"}}>Ver información</span>
+          <span>Ver información</span>
         </a>
 
       </TableCell>
