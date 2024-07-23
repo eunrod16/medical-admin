@@ -28,7 +28,7 @@ export function UsersTable({
     const intervalId = setInterval(() => {
       // Esto forzará la revalidación de la página actual
       window.location.reload();
-    }, 10000); // 10 segundos
+    }, 1000000); // 10 segundos
 
     return () => clearInterval(intervalId);
   }, [router]);
@@ -106,7 +106,7 @@ function UserRow({ paciente, search }: { paciente: SelectUser, search:string|nul
           href={`/admin/info?id=${pacienteId}`}
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <span>Ver información</span>
+          <span className="sr-only">Ver información</span>
         </Link>
 
       </TableCell>
