@@ -44,13 +44,15 @@ export async function fetchTail (){
   where id (listaIds)
   */
   
-  const tailIds = await db.select({
+  var tailIds = await db.select({
     idMin: sql<number>`min(${pacientes.id})`
   }).from(pacientes)
   .where(eq(pacientes.estado, "Atender"))
   .groupBy(pacientes.medico);
+
+  console.log(tailIds);
   
-  const listaPacientesIds = tailIds.map((paciente) => paciente.idMin);
+  var listaPacientesIds = tailIds.map((paciente) => paciente.idMin);
   if (listaPacientesIds.length > 0) {
      pacientesTail = await db.select({
       id: pacientes.id,

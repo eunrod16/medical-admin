@@ -28,7 +28,7 @@ export function UsersTable({
     const intervalId = setInterval(() => {
       // Esto forzará la revalidación de la página actual
       window.location.reload();
-    }, 1000000); // 10 segundos
+    }, 10000); // 10 segundos
 
     return () => clearInterval(intervalId);
   }, [router]);
