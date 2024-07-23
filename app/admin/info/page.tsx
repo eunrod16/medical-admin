@@ -52,7 +52,7 @@ export default async function IndexPage({
         <input id="pulse" name="pulse" value={paciente.pulso  ?? ''}  type="number" disabled  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
-        <label htmlFor="weight" className="block text-xs text-gray-600 uppercase">Peso (kg) </label>
+        <label htmlFor="weight" className="block text-xs text-gray-600 uppercase">Peso (lbs) </label>
         <input id="weight" name="weight" value={paciente.peso  ?? ''}  type="number" disabled className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
 
