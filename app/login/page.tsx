@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Form } from './form';
 import { signIn } from 'app/auth';
-import { SubmitButton } from 'app/admin/submit-button';
+import { SubmitButton } from 'app/admin/submit-button'; 
 
 export default function Login() {
   return (
@@ -17,7 +17,7 @@ export default function Login() {
           action={async (formData: FormData) => {
             'use server';
             await signIn('credentials', {
-              redirectTo: '/protected',
+              redirectTo: '/admin/list',
               email: formData.get('email') as string,
               password: formData.get('password') as string,
             });

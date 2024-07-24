@@ -1,10 +1,10 @@
 import { simpleUsers } from '@/lib/db';
 import { UsersTable } from 'app/admin/users-table';
-
+import { auth, signOut } from 'app/auth';
 
 
 export default async function IndexPage() {
-  
+  let session = await auth();
   const { pacientes } = await simpleUsers();
 
   return (
