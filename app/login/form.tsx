@@ -15,7 +15,7 @@ export function Form({
             htmlFor="email"
             className="block text-xs text-gray-600 uppercase"
           >
-            Username
+            Usuario
           </label>
           <input
             id="email"
@@ -30,7 +30,7 @@ export function Form({
             htmlFor="password"
             className="block text-xs text-gray-600 uppercase"
           >
-            Password
+            Contraseña
           </label>
           <input
             id="password"
