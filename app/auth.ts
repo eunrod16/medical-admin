@@ -19,6 +19,7 @@ export const {
         console.log(user)
         if (user.length === 0) return null;
         let passwordsMatch = await compare(password, user[0].password!);
+        console.log(passwordsMatch)
         if (passwordsMatch) return user[0] as any;
         else return null
       },
