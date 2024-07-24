@@ -178,3 +178,21 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
   await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono, presion:presion, pulso:pulso, peso:peso, temperatura:temperatura });
 }
 
+export async function getUser(email: string) {
+  const users = await ensureTableExists();
+  return await db.select().from(users).where(eq(users.email, email));
+}
+
+
+
+async function ensureTableExists() {
+
+  const table = pgTable('users', {
+    id: serial('id').primaryKey(),
+    email: varchar('username', { length: 255 }),
+    password: varchar('password', { length: 255 }),
+  });
+
+  return table;
+}
+
