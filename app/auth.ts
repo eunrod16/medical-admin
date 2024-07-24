@@ -18,6 +18,7 @@ export const {
         let user = await getUser(email);
         console.log(user)
         if (user.length === 0) return null;
+        console.log(password, user[0].password)
         let passwordsMatch = await compare(password, user[0].password!);
         console.log(passwordsMatch)
         if (passwordsMatch) return user[0] as any;
