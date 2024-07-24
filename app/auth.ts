@@ -15,16 +15,12 @@ export const {
   providers: [
     Credentials({
       async authorize({ email, password }: any) {
-        console.log(email,password)
         let user = await getUser(email);
-        console.log(user)
         if (user.length === 0) return null;
-        console.log(password, user[0].password)
         const salt = genSaltSync(10);
         const hash = hashSync(user[0].password!, salt);
-        
         let passwordsMatch = await compare(password,hash);
-        console.log(passwordsMatch)
+        console.log("passwordsMatch",passwordsMatch);
         if (passwordsMatch) return user[0] as any;
         else return null
       },

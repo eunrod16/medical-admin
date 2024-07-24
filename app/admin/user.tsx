@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { auth, signIn, signOut } from '@/lib/auth';
+import { auth, signIn, signOut } from 'app/auth'; //'@/lib/auth';
 import Image from 'next/image';
 
 export async function User() {
