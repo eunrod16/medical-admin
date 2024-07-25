@@ -24,5 +24,11 @@ export const authConfig = {
 
       return true;
     },
+    async signIn({ user }) {
+      if (!user) {
+        return '/login?error=Invalid credentials';
+      }
+      return true;
+    }
   },
 } satisfies NextAuthConfig;

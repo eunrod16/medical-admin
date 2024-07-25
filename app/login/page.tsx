@@ -2,8 +2,11 @@ import Link from 'next/link';
 import { Form } from './form';
 import { signIn } from 'app/auth';
 import { SubmitButton } from 'app/admin/submit-button'; 
+import { useSearchParams } from 'next/navigation';
 
 export default function Login() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
@@ -12,6 +15,11 @@ export default function Login() {
           <p className="text-sm text-gray-500">
             Usa el nombre de usuario y contraseña
           </p>
+          {error && (
+            <p className="text-red-500">
+              Credenciales inválidas. Por favor, inténtelo de nuevo.
+            </p>
+          )}
         </div>
         <Form
           action={async (formData: FormData) => {
