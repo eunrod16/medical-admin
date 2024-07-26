@@ -21,6 +21,9 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
   if (searchA) {
     data = data.filter(row => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
   }
+  else{
+    data = data.slice(4);
+  }
 
   return data;
 }

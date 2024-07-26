@@ -14,13 +14,16 @@ export function InventoryTable({ data }: { data: string[][] }) {
       <Table>
         <TableHeader>
           <TableRow>
-            {data[4]?.map((header: string, index: number) => (
-              <TableHead key={index} className="max-w-[150px]">{header}</TableHead>
-            ))}
+
+              <TableHead >Medicamento</TableHead>
+              <TableHead >Presentación</TableHead>
+              <TableHead >Cantidad</TableHead>
+              <TableHead >Familia</TableHead>
+
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.slice(5).map((row: string[], rowIndex: number) => (
+          {data.slice(0).map((row: string[], rowIndex: number) => (
             <TableRow key={rowIndex}>
               {row.map((cell: string, cellIndex: number) => (
                 <TableCell key={cellIndex} className="font-medium">{cell}</TableCell>
