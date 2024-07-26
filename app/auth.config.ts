@@ -9,7 +9,7 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    async authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
       let isOnDashboard = nextUrl.pathname.startsWith('/admin');
       console.log("isLoggedIn", isLoggedIn);
@@ -24,10 +24,10 @@ export const authConfig = {
 
       return true;
     },
-    async signIn({ user }) {
-      console.log("signIncallback", user);
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("callback",user, account, profile, email, credentials);
       if (!user) {
-        return '/login?error=Invalid credentials';
+        return '/login?error=CredentialsSignin';
       }
       return true;
     }
