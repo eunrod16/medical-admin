@@ -11,30 +11,27 @@ export default async function InventoryPage() {
   const data = await getSheetData(spreadsheetId, range);
   if (data){
     return (
-        <div>
-          <h1>Datos de Google Sheets</h1>
-          <table>
-            <thead>
-              <tr>
-                {data[4].map((header: string, index: number) => (
-                  <th key={index}>{header}</th>
+      <div>
+        <h1>Datos de Google Sheets</h1>
+        <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+          <thead>
+            <tr>
+              {data[4].map((header: string, index: number) => (
+                <th key={index} style={{ border: '1px solid black', padding: '8px' }}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.slice(5).map((row: string[], rowIndex: number) => (
+              <tr key={rowIndex}>
+                {row.map((cell: string, cellIndex: number) => (
+                  <td key={cellIndex} style={{ border: '1px solid black', padding: '8px' }}>{cell}</td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {data.slice(5).map((row: string[], rowIndex: number) => (
-                <tr key={rowIndex}>
-                  {row.map((cell: string, cellIndex: number) => (
-                    <td key={cellIndex}>{cell}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
   }
-
-
 }
