@@ -12,7 +12,7 @@ export default async function InventoryPage() {
       <div className="flex items-center mb-8">
         <h1 className="font-semibold text-lg md:text-2xl">Lista Medicamentos</h1>
       </div>
-
+      <InventoryTable  />
 
     </main>
   );
