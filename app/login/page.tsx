@@ -4,9 +4,13 @@ import { signIn } from 'next-auth/react';
 import { SubmitButton } from 'app/admin/submit-button';
 import { useSearchParams } from 'next/navigation';
 
-export default function Login() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get('error');
+export default function Login({
+  searchParams
+}: {
+  searchParams: { error: string; };
+}) {
+
+  const error = searchParams.error;
 
   const handleSubmit = async (formData: FormData) => {
     const result = await signIn('credentials', {
