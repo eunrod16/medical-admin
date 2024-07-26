@@ -1,9 +1,9 @@
 // app/inventory/page.tsx
 import { InventoryTable } from './inventory-table';
+import { getSheetData } from '@/lib/googleapi';
 
-export async function getServerSideProps(context: any) {
-  const searchA = context.query.searchA || ''; // Obtener el término de búsqueda de la query string
-
+export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string } }) {
+  const searchA = searchParams.searchA || '';
   return {
     props: {
       searchA
@@ -11,7 +11,10 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default function InventoryPage({ searchA }: { searchA: string }) {
+export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string } }) {
+  const searchA = searchParams.searchA || '';
+  const data = await getSheetData(process.env.SPREADSHEET_ID || '', 'adults!A:D', searchA);
+
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
       <div className="flex items-center mb-8">
@@ -27,7 +30,7 @@ export default function InventoryPage({ searchA }: { searchA: string }) {
         />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>
       </form>
-      <InventoryTable searchA={searchA} />
+      <InventoryTable data={data} />
     </main>
   );
 }

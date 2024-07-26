@@ -7,18 +7,15 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-import { getSheetData } from '@/lib/googleapi'; // Ajusta según tu estructura
 
-export async function InventoryTable({ searchA }: { searchA: string }) {
-  const data = await getSheetData(process.env.SPREADSHEET_ID || '', 'adults!A:D', searchA);
-
+export function InventoryTable({ data }: { data: string[][] }) {
   return (
     <form className="border shadow-sm rounded-lg">
       <Table>
         <TableHeader>
           <TableRow>
             {data[4]?.map((header: string, index: number) => (
-              <TableHead key={index} >{header}</TableHead>
+              <TableHead key={index} className="max-w-[150px]">{header}</TableHead>
             ))}
           </TableRow>
         </TableHeader>
