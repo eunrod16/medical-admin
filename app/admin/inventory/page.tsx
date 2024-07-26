@@ -1,57 +1,38 @@
-'use client';
-
+// pages/inventory.tsx
 import { getSheetData } from '@/lib/googleapi';
-import React, { useState, useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import React from 'react';
 
 const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s';
 const range = 'Sheet1!A1:E10';
 
-export default function InventoryPage() {
-  const [data, setData] = useState<string[][]>([]);
-  const [searchA, setSearchA] = useState('');
-  const [searchD, setSearchD] = useState('');
+interface InventoryPageProps {
+  data: string[][];
+  searchA: string;
+  searchD: string;
+}
 
-  useEffect(() => {
-    async function fetchData() {
-      const sheetData = await getSheetData(spreadsheetId, range);
-      setData(sheetData);
-    }
-    fetchData();
-  }, []);
-
-  const handleSearchAChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchA(e.target.value);
-  };
-
-  const handleSearchDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchD(e.target.value);
-  };
-
-  const filteredData = data.filter(row => {
-    const matchesA = row[0]?.toLowerCase().includes(searchA.toLowerCase());
-    const matchesD = row[3]?.toLowerCase().includes(searchD.toLowerCase());
-    return matchesA && matchesD;
-  });
-
+const InventoryPage: React.FC<InventoryPageProps> = ({ data, searchA, searchD }) => {
   return (
     <div>
       <h1>Datos de Google Sheets</h1>
-      <div>
+      <form method="GET">
         <input
           type="text"
+          name="searchA"
           placeholder="Buscar en Columna A"
-          value={searchA}
-          onChange={handleSearchAChange}
+          defaultValue={searchA}
           style={{ marginRight: '10px', padding: '5px' }}
         />
         <input
           type="text"
+          name="searchD"
           placeholder="Buscar en Columna D"
-          value={searchD}
-          onChange={handleSearchDChange}
+          defaultValue={searchD}
           style={{ padding: '5px' }}
         />
-      </div>
+        <button type="submit" style={{ padding: '5px 10px', marginLeft: '10px' }}>Buscar</button>
+      </form>
       <table style={{ borderCollapse: 'collapse', width: '100%', marginTop: '20px' }}>
         <thead>
           <tr>
@@ -63,7 +44,7 @@ export default function InventoryPage() {
           </tr>
         </thead>
         <tbody>
-          {filteredData.slice(1).map((row, rowIndex) => (
+          {data.slice(1).map((row, rowIndex) => (
             <tr key={rowIndex}>
               {row.map((cell, cellIndex) => (
                 <td key={cellIndex} style={{ border: '1px solid black', padding: '8px' }}>
@@ -76,4 +57,26 @@ export default function InventoryPage() {
       </table>
     </div>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { searchA = '', searchD = '' } = context.query;
+
+  const sheetData = await getSheetData(spreadsheetId, range);
+
+  const filteredData = sheetData.filter(row => {
+    const matchesA = row[0]?.toLowerCase().includes((searchA as string).toLowerCase());
+    const matchesD = row[3]?.toLowerCase().includes((searchD as string).toLowerCase());
+    return matchesA && matchesD;
+  });
+
+  return {
+    props: {
+      data: filteredData,
+      searchA,
+      searchD,
+    },
+  };
+};
+
+export default InventoryPage;
