@@ -13,7 +13,7 @@ export async function generateMetadata({ searchParams }: { searchParams: { searc
 
 export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string } }) {
   const searchA = searchParams.searchA || '';
-  const data = await getSheetData(process.env.SPREADSHEET_ID || '', 'adults!A:D', searchA);
+  const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:D', searchA);
 
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
