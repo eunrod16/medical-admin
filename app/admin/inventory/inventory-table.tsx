@@ -15,12 +15,12 @@ const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKP
 const range = 'adults!A:D'; // Rango en la hoja de cálculo
 
 export function InventoryTable() {
-  const [data, setData] = useState<string[][] | null>(null);
+
   useEffect(() => {
     const loadData = async () => {
 
         const sheetData = await getSheetData(spreadsheetId, range);
-        setData(sheetData);
+
 
     };
 
