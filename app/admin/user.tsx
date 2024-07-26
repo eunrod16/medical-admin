@@ -11,7 +11,7 @@ export async function User() {
       <form
         action={async () => {
           'use server';
-          await signIn();
+          await signIn('github');
         }}
       >
         <Button variant="outline">Sign In</Button>

@@ -9,7 +9,7 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    async authorized({ auth, request: { nextUrl } }) {
+     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
       let isOnDashboard = nextUrl.pathname.startsWith('/admin');
       console.log("isLoggedIn", isLoggedIn);
