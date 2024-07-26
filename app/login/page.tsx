@@ -1,10 +1,12 @@
-import { getProviders, signIn, getSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Form } from './form';
+import { signIn } from 'next-auth/react';
 import { SubmitButton } from 'app/admin/submit-button';
+import { useSearchParams } from 'next/navigation';
 
-export default async function Login({ searchParams }) {
-  const error = searchParams.error || '';
+export default function Login() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
 
   const handleSubmit = async (formData: FormData) => {
     const result = await signIn('credentials', {
@@ -40,22 +42,4 @@ export default async function Login({ searchParams }) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (session) {
-    return {
-      redirect: {
-        destination: '/admin',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      searchParams: context.query,
-    },
-  };
 }
