@@ -22,7 +22,6 @@ export async function InventoryTable({ searchA }: { searchA: string }) {
         type="text"
         placeholder="Search Column A"
         value={searchA}
-        readOnly
         className="border p-2 rounded mb-4"
       />
       <Table>
