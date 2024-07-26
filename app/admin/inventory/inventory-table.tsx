@@ -22,10 +22,7 @@ export async function InventoryTable() {
 
 
   return (
-    <div>
-      <div className="mb-4">
 
-      </div>
       <form className="border shadow-sm rounded-lg">
         <Table>
           <TableHeader>
@@ -46,6 +43,5 @@ export async function InventoryTable() {
           </TableBody>
         </Table>
       </form>
-    </div>
   );
 }
