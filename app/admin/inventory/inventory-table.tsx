@@ -1,6 +1,4 @@
-// app/inventory/page.tsx
-import { getSheetData } from '@/lib/googleapi';
-import React from 'react';
+// app/inventory/inventory-table.tsx
 import {
   Table,
   TableHead,
@@ -9,26 +7,18 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-
-const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s'; // Variable de entorno
-const range = 'adults!A:D'; // Rango en la hoja de cálculo
+import { getSheetData } from '@/lib/googleapi'; // Ajusta según tu estructura
 
 export async function InventoryTable({ searchA }: { searchA: string }) {
-  const data = await getSheetData(spreadsheetId, range, searchA);
+  const data = await getSheetData(process.env.SPREADSHEET_ID || '', 'adults!A:D', searchA);
 
   return (
     <form className="border shadow-sm rounded-lg">
-      <input
-        type="text"
-        placeholder="Search Column A"
-        value={searchA}
-        className="border p-2 rounded mb-4"
-      />
       <Table>
         <TableHeader>
           <TableRow>
             {data[4]?.map((header: string, index: number) => (
-              <TableHead key={index} className="max-w-[150px]">{header}</TableHead>
+              <TableHead key={index} >{header}</TableHead>
             ))}
           </TableRow>
         </TableHeader>
@@ -44,14 +34,4 @@ export async function InventoryTable({ searchA }: { searchA: string }) {
       </Table>
     </form>
   );
-}
-
-// app/inventory/page.tsx (Ruta del servidor)
-export async function generateStaticParams() {
-  // Generar parámetros estáticos si es necesario
-  return [{ searchA: '' }];
-}
-
-export default async function Page({ searchA }: { searchA: string }) {
-  return <InventoryTable searchA={searchA} />;
 }
