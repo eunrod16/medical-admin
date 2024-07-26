@@ -14,9 +14,29 @@ import { getSheetData } from '@/lib/googleapi'; // Ajusta según tu estructura
 const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s'; // Variable de entorno
 const range = 'adults!A:D'; // Rango en la hoja de cálculo
 
-export async function InventoryTable() {
+export  function InventoryTable() {
 
-  const data= await getSheetData(spreadsheetId, range);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data= await getSheetData(spreadsheetId, range); // Implement fetchUsers to get the latest data
+  
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Initial data fetch
+    fetchData();
+
+    // Set interval to reload data every 10 seconds 10000
+    const intervalId = setInterval(fetchData, 10000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
 
 
   return (
