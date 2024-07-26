@@ -20,7 +20,7 @@ export async function updatePatient(id: number, search:string|null, status:strin
 }
 
 export async function fetchUsers() {
-  const moreUsers = await db.select().from(pacientes).orderBy(asc(pacientes.id)).limit(20);
+  const moreUsers = await db.select().from(pacientes).orderBy(asc(pacientes.id));
   return { pacientes: moreUsers };
 }
 
