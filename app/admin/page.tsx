@@ -38,13 +38,7 @@ export default async function IndexPage({
 
       <Form action={register}>
         <SubmitButton>Ingresar</SubmitButton>
-        <p className="text-center text-sm text-gray-600">
-          {'Already have an account? '}
-          <a href="/login" className="font-semibold text-gray-800">
-            Sign in
-          </a>
-          {' instead.'}
-        </p>
+
       </Form>
     </main>
   );

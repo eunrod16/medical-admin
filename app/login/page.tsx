@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 export default function Login() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
+  console.log(error);
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">

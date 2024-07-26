@@ -25,6 +25,7 @@ export const authConfig = {
       return true;
     },
     async signIn({ user }) {
+      console.log("signIncallback", user);
       if (!user) {
         return '/login?error=Invalid credentials';
       }
