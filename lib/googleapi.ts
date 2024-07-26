@@ -13,5 +13,5 @@ export async function getSheetData(spreadsheetId: string, range: string) {
     range,
   });
 
-  return response.data.values;
+  return response.data.values || [];
 }
