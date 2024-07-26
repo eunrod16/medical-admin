@@ -1,5 +1,5 @@
 
-
+'use client';
 import {
   Table,
   TableHead,
@@ -11,7 +11,7 @@ import {
 import { getSheetData } from '@/lib/googleapi'; // Ajusta según tu estructura
 
 const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s'; // Variable de entorno
-const range = 'adults!A:A'; // Rango en la hoja de cálculo
+const range = 'adults!A:D'; // Rango en la hoja de cálculo
 
 export async function InventoryTable() {
 
