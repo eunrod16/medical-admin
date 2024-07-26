@@ -2,11 +2,15 @@ import Link from 'next/link';
 import { Form } from './form';
 import { signIn } from 'app/auth';
 import { SubmitButton } from 'app/admin/submit-button'; 
-import { useSearchParams } from 'next/navigation';
 
-export default function Login() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get('error');
+
+export default function Login({
+  searchParams
+}: {
+  searchParams: { error: string;  };
+}) {
+
+  const error = searchParams.error;
   console.log(error);
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
