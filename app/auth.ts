@@ -16,13 +16,13 @@ export const {
     Credentials({
       async authorize({ email, password }: any) {
         let user = await getUser(email);
-        if (user.length === 0) throw new Error('Invalid credentials');
+        if (user.length === 0) return null;
         const salt = genSaltSync(10);
         const hash = hashSync(user[0].password!, salt);
         let passwordsMatch = await compare(password,hash);
         console.log("passwordsMatch",passwordsMatch);
         if (passwordsMatch) return user[0] as any;
-        else throw new Error('Invalid credentials');
+        else return null;
       },
     }), 
   ],

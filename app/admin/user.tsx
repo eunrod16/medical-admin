@@ -11,7 +11,7 @@ export async function User() {
       <form
         action={async () => {
           'use server';
-          await signIn('github');
+          await signIn();
         }}
       >
         <Button variant="outline">Sign In</Button>
@@ -29,13 +29,8 @@ export async function User() {
       >
         <Button variant="outline">Sign Out</Button>
       </form>
-      <Image
-        className="h-8 w-8 rounded-full"
-        src={user.image!}
-        height={32}
-        width={32}
-        alt={`${user.name} avatar`}
-      />
+
+
     </div>
   );
 }
