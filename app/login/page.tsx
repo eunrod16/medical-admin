@@ -1,17 +1,25 @@
+import { getProviders, signIn, getSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Form } from './form';
-import { signIn } from 'app/auth';
-import { SubmitButton } from 'app/admin/submit-button'; 
+import { SubmitButton } from 'app/admin/submit-button';
 
+export default async function Login({ searchParams }) {
+  const error = searchParams.error || '';
 
-export default function Login({
-  searchParams
-}: {
-  searchParams: { error: string;  };
-}) {
+  const handleSubmit = async (formData: FormData) => {
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    });
 
-  const error = searchParams.error;
-  console.log(error);
+    if (result?.error) {
+      window.location.href = '/login?error=Credenciales inválidas. Por favor, inténtelo de nuevo.';
+    } else if (result?.ok) {
+      window.location.href = '/admin';
+    }
+  };
+
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
@@ -22,24 +30,32 @@ export default function Login({
           </p>
           {error && (
             <p className="text-red-500">
-              Credenciales inválidas. Por favor, inténtelo de nuevo.
+              {error}
             </p>
           )}
         </div>
-        <Form
-          action={async (formData: FormData) => {
-            'use server';
-            await signIn('credentials', {
-              redirectTo: '/admin',
-              email: formData.get('email') as string,
-              password: formData.get('password') as string,
-            });
-          }}
-        >
+        <Form action={handleSubmit}>
           <SubmitButton>Ingresar</SubmitButton>
-
         </Form>
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      searchParams: context.query,
+    },
+  };
 }

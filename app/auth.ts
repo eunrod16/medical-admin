@@ -15,15 +15,25 @@ export const {
   providers: [
     Credentials({
       async authorize({ email, password }: any) {
-        let user = await getUser(email);
-        if (user.length === 0) return null;
-        const salt = genSaltSync(10);
-        const hash = hashSync(user[0].password!, salt);
-        let passwordsMatch = await compare(password,hash);
-        console.log("passwordsMatch",passwordsMatch);
-        if (passwordsMatch) return user[0] as any;
-        else return null;
+
+        try {
+          let user = await getUser(email);
+          if (user.length === 0) return null;
+          const salt = genSaltSync(10);
+          const hash = hashSync(user[0].password!, salt);
+          let passwordsMatch = await compare(password,hash);
+          console.log("passwordsMatch",passwordsMatch);
+          if (passwordsMatch) return user[0] as any;
+          else return null;
+        } catch (error) {
+          console.error('Authorization error:', error);
+          return null;
+        }
+
       },
     }), 
   ],
 });
+
+
+

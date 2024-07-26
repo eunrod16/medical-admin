@@ -23,13 +23,6 @@ export const authConfig = {
       }
 
       return true;
-    },
-    async signIn({ user, account, profile, email, credentials }) {
-      console.log("callback",user, account, profile, email, credentials);
-      if (!user) {
-        return '/login?error=CredentialsSignin';
-      }
-      return true;
     }
   },
 } satisfies NextAuthConfig;
