@@ -1,13 +1,9 @@
 // lib/googleSheets.ts
 import { google } from 'googleapis';
-import fs from 'fs';
-import path from 'path';
-
-const keyFilePath = path.join(process.cwd(), 'credentials.json');
 
 export async function getSheetData(spreadsheetId: string, range: string) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: keyFilePath,
+    credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   });
 
