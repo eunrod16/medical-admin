@@ -18,16 +18,10 @@ export function InventoryTable() {
   const [data, setData] = useState<string[][] | null>(null);
   useEffect(() => {
     const loadData = async () => {
-      try {
+
         const sheetData = await getSheetData(spreadsheetId, range);
         setData(sheetData);
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log(error.message);
-        } else {
-          console.log('An unknown error occurred');
-        }
-      } 
+
     };
 
     loadData();
