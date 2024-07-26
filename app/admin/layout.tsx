@@ -7,7 +7,8 @@ import {
   PanelLeft,
   Settings,
   ShoppingCart,
-  Users2, Armchair, List
+  Users2, Armchair, List,
+  ShoppingCartIcon
 } from 'lucide-react';
 
 import { Logo} from '@/components/icons';
@@ -86,6 +87,10 @@ function DesktopNav() {
         <NavItem href="/admin/doctors" label="Médicos">
           <Users2 className="h-5 w-5" />
         </NavItem>
+
+        <NavItem href="/admin/inventory" label="Farmacia">
+          <ShoppingCart className="h-5 w-5" />
+        </NavItem>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>
@@ -150,6 +155,14 @@ function MobileNav() {
           >
             <Users2 className="h-5 w-5" />
             Médicos
+          </Link>
+
+          <Link
+            href="/admin/inventory"
+            className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+          >
+            <ShoppingCartIcon className="h-5 w-5" />
+            Inventario
           </Link>
 
         </nav>
