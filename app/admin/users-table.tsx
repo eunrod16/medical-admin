@@ -53,6 +53,7 @@ export function UsersTable({ initialPacientes, offset }: { initialPacientes: Sel
 
   return (
     <>
+     <p>Total de pacientes: {pacientes.length}</p>
       <form className="border shadow-sm rounded-lg">
         <Table>
           <TableHeader>
