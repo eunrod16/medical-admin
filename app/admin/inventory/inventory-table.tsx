@@ -14,18 +14,10 @@ import { getSheetData } from '@/lib/googleapi'; // Ajusta según tu estructura
 const spreadsheetId = process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s'; // Variable de entorno
 const range = 'adults!A:D'; // Rango en la hoja de cálculo
 
-export function InventoryTable() {
+export async function InventoryTable() {
 
-  useEffect(() => {
-    const loadData = async () => {
+  const data= await getSheetData(spreadsheetId, range);
 
-        const sheetData = await getSheetData(spreadsheetId, range);
-
-
-    };
-
-    loadData();
-  }, []);
 
   return (
     <div>
