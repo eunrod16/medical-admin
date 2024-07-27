@@ -44,7 +44,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
                 <TableCell key={cellIndex} className="font-medium">
                   {cellIndex === 2 ? (
                     <form
-                      onSubmit={(e) => handleFormSubmit(e, rowIndex)}
+                      onSubmit={(e) => handleFormSubmit(e)}
                       className="flex items-center"
                     >
                       <input
