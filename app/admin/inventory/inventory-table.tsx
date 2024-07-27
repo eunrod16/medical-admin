@@ -1,5 +1,5 @@
 'use client'; // Este componente es un componente de cliente
-
+import  { useRef } from 'react';
 import React from 'react';
 import {
   Table,
@@ -25,6 +25,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
 
    // await handleEditClick(rowIndex, newValue);
   };
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <form className="border shadow-sm rounded-lg">
@@ -43,7 +44,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
               {row.map((cell: string, cellIndex: number) => (
                 <TableCell key={cellIndex} className="font-medium">
                   {cellIndex === 2 ? (
-                    <form
+                    <form ref={formRef}
                     onSubmit={handleFormSubmit} 
                       className="flex items-center"
                     >
