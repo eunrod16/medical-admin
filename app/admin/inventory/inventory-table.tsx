@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableHead,
@@ -7,29 +7,33 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-import { updateSheetData } from '@/lib/googleapi';
 
 export function InventoryTable({ data }: { data: string[][] }) {
-  const [editableRowIndex, setEditableRowIndex] = useState<number | null>(null);
-  const [editedValue, setEditedValue] = useState<string>('');
+  const handleEditClick = async (rowIndex: number, newValue: string) => {
+    const response = await fetch('/api/update-sheet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        rowIndex,
+        newValue,
+      }),
+    });
 
-  // Función para iniciar la edición
-  const handleEditClick = (rowIndex: number, currentValue: string) => {
-    setEditableRowIndex(rowIndex);
-    setEditedValue(currentValue);
-  };
-
-  // Función para guardar la edición
-  const handleSaveClick = async (rowIndex: number) => {
-    if (editableRowIndex !== null) {
-      await updateSheetData(rowIndex, editedValue);
-      setEditableRowIndex(null);
+    if (!response.ok) {
+      console.error('Error updating sheet data');
+    } else {
+      alert('Data updated successfully');
     }
   };
 
-  // Función para manejar cambios en el campo de entrada
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedValue(event.target.value);
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const newValue = formData.get('quantity') as string;
+
+    await handleEditClick(rowIndex, newValue);
   };
 
   return (
@@ -41,44 +45,37 @@ export function InventoryTable({ data }: { data: string[][] }) {
             <TableHead>Presentación</TableHead>
             <TableHead>Cantidad</TableHead>
             <TableHead>Familia</TableHead>
+            <TableHead>Acción</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((row: string[], rowIndex: number) => (
+          {data.slice(0).map((row: string[], rowIndex: number) => (
             <TableRow key={rowIndex}>
               {row.map((cell: string, cellIndex: number) => (
                 <TableCell key={cellIndex} className="font-medium">
-                  {cellIndex === 2 && rowIndex === editableRowIndex ? (
-                    <input
-                      type="text"
-                      value={editedValue}
-                      onChange={handleInputChange}
-                      className="border p-1 rounded"
-                    />
+                  {cellIndex === 2 ? (
+                    <form
+                      onSubmit={(e) => handleFormSubmit(e, rowIndex)}
+                      className="flex items-center"
+                    >
+                      <input
+                        type="text"
+                        name="quantity"
+                        defaultValue={cell}
+                        className="border p-1 rounded"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-blue-500 text-white p-1 rounded ml-2"
+                      >
+                        Save
+                      </button>
+                    </form>
                   ) : (
                     cell
                   )}
                 </TableCell>
               ))}
-              <TableCell>
-                {rowIndex === editableRowIndex ? (
-                  <button
-                    type="button"
-                    onClick={() => handleSaveClick(rowIndex)}
-                    className="bg-blue-500 text-white p-1 rounded"
-                  >
-                    Save
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => handleEditClick(rowIndex, row[2])}
-                    className="bg-green-500 text-white p-1 rounded"
-                  >
-                    Edit
-                  </button>
-                )}
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
