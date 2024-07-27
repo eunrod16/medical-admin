@@ -1,4 +1,4 @@
-'use client'; // Esto indica que este es un componente de cliente
+'use client'; // Este componente es un componente de cliente
 
 import React from 'react';
 import {
@@ -9,11 +9,14 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-import { updateSheetData } from 'app/admin/inventory/update-sheet';
 
-export function InventoryTableClient({ data }: { data: string[][] }) {
+interface InventoryTableClientProps {
+  data: string[][];
+}
+
+export function InventoryTableClient({ data }: InventoryTableClientProps) {
   const handleEditClick = async (rowIndex: number, newValue: string) => {
-    const response = await fetch('/admin/inventory/update-sheet', {
+    const response = await fetch('/app/admin/inventory/update-sheet', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,14 +35,11 @@ export function InventoryTableClient({ data }: { data: string[][] }) {
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
-
-
+    event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newValue = formData.get('quantity') as string;
-    console.log("handleFormSubmit",rowIndex, newValue);
 
-    await updateSheetData(rowIndex, newValue);
-    event.preventDefault();
+    await handleEditClick(rowIndex, newValue);
   };
 
   return (
@@ -51,6 +51,7 @@ export function InventoryTableClient({ data }: { data: string[][] }) {
             <TableHead>Presentación</TableHead>
             <TableHead>Cantidad</TableHead>
             <TableHead>Familia</TableHead>
+            <TableHead>Acción</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
