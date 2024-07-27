@@ -1,3 +1,5 @@
+'use client'; // Esto indica que este es un componente de cliente
+
 import React from 'react';
 import {
   Table,
@@ -8,7 +10,7 @@ import {
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
 
-export function InventoryTable({ data }: { data: string[][] }) {
+export function InventoryTableClient({ data }: { data: string[][] }) {
   const handleEditClick = async (rowIndex: number, newValue: string) => {
     const response = await fetch('/api/update-sheet', {
       method: 'POST',

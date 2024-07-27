@@ -1,5 +1,5 @@
 // app/inventory/page.tsx
-import { InventoryTable } from './inventory-table';
+import { InventoryTableClient } from './inventory-table';
 import { getSheetData } from '@/lib/googleapi';
 
 export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string } }) {
@@ -30,7 +30,7 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
         />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>
       </form>
-      <InventoryTable data={data} />
+      <InventoryTableClient data={data} />
     </main>
   );
 }
