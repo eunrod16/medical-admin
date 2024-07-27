@@ -9,10 +9,27 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-import { updateSheetData } from '@/lib/googleapi';
+import { updateSheetData } from '/admin/inventory/update-sheet';
 
 export function InventoryTableClient({ data }: { data: string[][] }) {
+  const handleEditClick = async (rowIndex: number, newValue: string) => {
+    const response = await fetch('/admin/inventory/update-sheet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        rowIndex,
+        newValue,
+      }),
+    });
 
+    if (!response.ok) {
+      console.error('Error updating sheet data');
+    } else {
+      alert('Data updated successfully');
+    }
+  };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
     event.preventDefault();
