@@ -35,11 +35,12 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
   };
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newValue = formData.get('quantity') as string;
+    console.log("handleFormSubmit");
+    //event.preventDefault();
+   // const formData = new FormData(event.currentTarget);
+    //const newValue = formData.get('quantity') as string;
 
-    await handleEditClick(rowIndex, newValue);
+   // await handleEditClick(rowIndex, newValue);
   };
 
   return (
