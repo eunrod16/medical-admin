@@ -12,7 +12,7 @@ import {
 
 export function InventoryTableClient({ data }: { data: string[][] }) {
   const handleEditClick = async (rowIndex: number, newValue: string) => {
-    const response = await fetch('/api/update-sheet', {
+    const response = await fetch('/admin/inventory/update-sheet', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +47,6 @@ export function InventoryTableClient({ data }: { data: string[][] }) {
             <TableHead>Presentación</TableHead>
             <TableHead>Cantidad</TableHead>
             <TableHead>Familia</TableHead>
-            <TableHead>Acción</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
