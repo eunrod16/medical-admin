@@ -1,5 +1,4 @@
-// app/inventory/InventoryTableClient.tsx
-'use client'; // Asegura que este es un componente de cliente
+'use client'; // Este componente es un componente de cliente
 
 import React from 'react';
 import {
@@ -16,14 +15,15 @@ interface InventoryTableClientProps {
 }
 
 export function InventoryTableClient({ data }: InventoryTableClientProps) {
-  const handleEditSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const newValue = formData.get('quantity') as string;
 
 
+  const handleFormSubmit = async (event: React.FormEvent) => {
+    console.log("handleFormSubmit");
+    //event.preventDefault();
+   // const formData = new FormData(event.currentTarget);
+    //const newValue = formData.get('quantity') as string;
 
-
+   // await handleEditClick(rowIndex, newValue);
   };
 
   return (
@@ -35,7 +35,6 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
             <TableHead>Presentación</TableHead>
             <TableHead>Cantidad</TableHead>
             <TableHead>Familia</TableHead>
-            <TableHead>Acción</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -44,7 +43,10 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
               {row.map((cell: string, cellIndex: number) => (
                 <TableCell key={cellIndex} className="font-medium">
                   {cellIndex === 2 ? (
-                    <form onSubmit={(e) => handleEditSubmit(e, rowIndex)}>
+                    <form
+                      onSubmit={(e) => handleFormSubmit(e, rowIndex)}
+                      className="flex items-center"
+                    >
                       <input
                         type="text"
                         name="quantity"
