@@ -9,7 +9,7 @@ import {
   TableCell,
   TableBody
 } from '@/components/ui/table'; // Ajusta según tu estructura
-import { updateSheetData } from '/admin/inventory/update-sheet';
+import { updateSheetData } from 'app/admin/inventory/update-sheet';
 
 export function InventoryTableClient({ data }: { data: string[][] }) {
   const handleEditClick = async (rowIndex: number, newValue: string) => {
