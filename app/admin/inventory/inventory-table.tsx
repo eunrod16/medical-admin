@@ -1,4 +1,5 @@
-'use client'; // Este componente es un componente de cliente
+// app/inventory/InventoryTableClient.tsx
+'use client'; // Asegura que este es un componente de cliente
 
 import React from 'react';
 import {
@@ -15,32 +16,14 @@ interface InventoryTableClientProps {
 }
 
 export function InventoryTableClient({ data }: InventoryTableClientProps) {
-  const handleEditClick = async (rowIndex: number, newValue: string) => {
-    const response = await fetch('/app/admin/inventory/update-sheet', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        rowIndex,
-        newValue,
-      }),
-    });
+  const handleEditSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const newValue = formData.get('quantity') as string;
 
-    if (!response.ok) {
-      console.error('Error updating sheet data');
-    } else {
-      alert('Data updated successfully');
-    }
-  };
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>, rowIndex: number) => {
-    console.log("handleFormSubmit");
-    //event.preventDefault();
-   // const formData = new FormData(event.currentTarget);
-    //const newValue = formData.get('quantity') as string;
 
-   // await handleEditClick(rowIndex, newValue);
+
   };
 
   return (
@@ -61,10 +44,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
               {row.map((cell: string, cellIndex: number) => (
                 <TableCell key={cellIndex} className="font-medium">
                   {cellIndex === 2 ? (
-                    <form
-                      onSubmit={(e) => handleFormSubmit(e, rowIndex)}
-                      className="flex items-center"
-                    >
+                    <form onSubmit={(e) => handleEditSubmit(e, rowIndex)}>
                       <input
                         type="text"
                         name="quantity"
