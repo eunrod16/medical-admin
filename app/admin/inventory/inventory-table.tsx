@@ -35,6 +35,7 @@ export function InventoryTableClient({ data }: { data: string[][] }) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newValue = formData.get('quantity') as string;
+    console.log("handleFormSubmit",rowIndex, newValue);
 
     await updateSheetData(rowIndex, newValue);
   };
