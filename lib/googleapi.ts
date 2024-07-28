@@ -25,7 +25,7 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
     if (searchA) {
       result = result.filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
     } else {
-      result = result.slice(5).map(({ row, index }) => ({ row, index: index + 5 }));
+      result = result.slice(5).map(({ row, index }) => ({ row, index: index  }));
     }
     console.log("result",result)
   
