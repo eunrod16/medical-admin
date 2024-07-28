@@ -4,6 +4,35 @@
 import { google } from 'googleapis';
 
 
+
+export async function getUniqueFamilies(spreadsheetId: string, range: string) {
+  const auth = new google.auth.GoogleAuth({
+    credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range,
+  });
+
+  const data = response.data.values || [];
+  const families = data.slice(1).map(row => row[3]); // Obtener valores de la columna D (índice 3)
+  const uniqueFamilies: string[] = []; // Array para almacenar los valores únicos
+
+  // Recorrer los datos y agregar solo valores únicos al array
+  families.forEach(family => {
+    if (family && !uniqueFamilies.includes(family)) {
+      uniqueFamilies.push(family);
+    }
+  });
+
+  return uniqueFamilies;
+}
+
+
+
 export async function getSheetData(spreadsheetId: string, range: string, searchA: string = '') {
     const auth = new google.auth.GoogleAuth({
       credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),

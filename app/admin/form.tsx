@@ -62,6 +62,7 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
           <option value="MG">Medicina General</option>
           <option value="MI">Medicina Interna</option>
           <option value="G">Ginecología</option>
+          <option value="N">Nutrición</option>
         </select>
       </div>
       {children}

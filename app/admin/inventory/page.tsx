@@ -1,6 +1,6 @@
 // app/inventory/page.tsx
 import { InventoryTableClient } from './inventory-table';
-import { getSheetData } from '@/lib/googleapi';
+import { getSheetData, getUniqueFamilies } from '@/lib/googleapi';
 
 export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string } }) {
   const searchA = searchParams.searchA || '';
@@ -14,6 +14,8 @@ export async function generateMetadata({ searchParams }: { searchParams: { searc
 export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string } }) {
   const searchA = searchParams.searchA || '';
   const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:D', searchA);
+  const families = await getUniqueFamilies(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!D:D');
+
 
   return (
     <main className="flex flex-1 flex-col p-4 md:p-6">
@@ -25,9 +27,21 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
           type="text"
           name="searchA"
           placeholder="Buscar medicamento"
-          defaultValue={searchA}
           className="border p-2 rounded mb-4"
         />
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>
+      </form>
+      <form action="" method="get" className="mb-4">
+        <select
+          name="searchB"
+          className="border p-2 rounded mb-4"
+        >
+          <option value="">Seleccionar familia</option>
+          {families.map((family, index) => (
+            <option key={index} value={family}>{family}</option>
+          ))}
+
+        </select>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>
       </form>
       <InventoryTableClient data={data} />
