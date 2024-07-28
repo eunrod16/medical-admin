@@ -1,5 +1,5 @@
 'use client'; // Este componente es un componente de cliente
-import  { useRef } from 'react';
+import { useRef } from 'react';
 import React from 'react';
 import {
   Table,
@@ -16,22 +16,20 @@ interface InventoryTableClientProps {
 }
 
 export function InventoryTableClient({ data }: InventoryTableClientProps) {
-
-
   return (
     <form className="border shadow-sm rounded-lg">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Medicamento</TableHead>
-            <TableHead>Presentación</TableHead>
-            <TableHead>Cantidad</TableHead>
-            <TableHead>Familia</TableHead>
+            <TableHead className="hidden md:table-cell">Presentación</TableHead>
+            <TableHead>Cantidad Actual</TableHead>
+            <TableHead className="hidden md:table-cell">Familia</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data.slice(0).map((row: string[], rowIndex: number) => (
-          <ProductRow rowIndex={rowIndex} row = {row} ></ProductRow>
+            <ProductRow key={rowIndex} rowIndex={rowIndex} row={row} />
           ))}
         </TableBody>
       </Table>
@@ -39,42 +37,45 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
   );
 }
 
-
-function ProductRow({rowIndex, row }: { rowIndex: number, row:string[] }) {
-
-
-
-  var newValue = '';
-  const updateProduct= updateSheetData.bind( null, rowIndex, newValue );
+function ProductRow({ rowIndex, row }: { rowIndex: number; row: string[] }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const oldValue = parseInt(row[2]); // Almacena el valor antiguo
+  const updateProduct = async () => {
+    if (inputRef.current) {
+      const newValue = parseInt(inputRef.current.value);
+      await updateSheetData(rowIndex, newValue, oldValue);
+    }
+  };
 
   return (
-<TableRow key={rowIndex}>
-              {row.map((cell: string, cellIndex: number) => (
-                <TableCell key={cellIndex} className="font-medium">
-                  {cellIndex === 2 ? (
-                    <div>
-                      {cell}
-                      <input
-                        type="text"
-                        name="quantity"
-                        value={newValue}
-                        className="border p-1 rounded"
-                      />
-                      <button
-                        formAction={updateProduct}
-                        className="bg-blue-500 text-white p-1 rounded ml-2"
-                      >
-                        Save
-                      </button>
-                      </div>
-
-                  ) : (
-                    cell
-                  )}
-                </TableCell>
-              ))}
-            </TableRow>
+    <TableRow key={rowIndex}>
+      {row.map((cell: string, cellIndex: number) => {
+        const className = cellIndex === 0 || cellIndex === 2 ? 'font-medium' : 'hidden md:table-cell';
+        return (
+          <TableCell key={cellIndex} className={className}>
+            {cellIndex === 2 ? (
+              <div>
+                <p>Cantidad Actual: {cell}</p>
+                <input
+                  ref={inputRef}
+                  type="number"
+                  name="quantity"
+                  className="border p-1 rounded"
+                />
+                <button
+                  type="button"
+                  onClick={updateProduct}
+                  className="bg-blue-500 text-white p-1 rounded ml-2"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              cell
+            )}
+          </TableCell>
+        );
+      })}
+    </TableRow>
   );
 }
-
-
