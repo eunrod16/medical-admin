@@ -24,7 +24,7 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
         <input
           type="text"
           name="searchA"
-          placeholder="Buscar en la columna A"
+          placeholder="Buscar medicamento"
           defaultValue={searchA}
           className="border p-2 rounded mb-4"
         />

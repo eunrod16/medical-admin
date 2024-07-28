@@ -65,9 +65,9 @@ function ProductRow({ rowIndex, row }: { rowIndex: number; row: string[] }) {
                 <button
                   type="button"
                   onClick={updateProduct}
-                  className="bg-blue-500 text-white p-1 rounded ml-2"
+                  className="bg-blue-500 text-white p-1 rounded"
                 >
-                  Save
+                  Despachar
                 </button>
               </div>
             ) : (
