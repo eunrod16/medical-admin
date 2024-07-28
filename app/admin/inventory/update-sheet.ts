@@ -12,9 +12,10 @@ import { revalidatePath } from 'next/cache';
     });
   
     const sheets = google.sheets({ version: 'v4', auth });
+    newValue = oldValue-newValue;
   
     // Ajusta el rango para que coincida con la fila que deseas actualizar
-    const range = `adults!C${rowIndex+6 }`; // +2 si hay una fila de encabezado
+    const range = `adults!C${rowIndex }`; // +2 si hay una fila de encabezado
   
     try {
       await sheets.spreadsheets.values.update({
