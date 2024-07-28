@@ -12,7 +12,7 @@ import {
 import { updateSheetData } from './update-sheet';
 
 interface InventoryTableClientProps {
-  data: string[][];
+  data: { row: string[], index: number }[];
 }
 
 export function InventoryTableClient({ data }: InventoryTableClientProps) {
@@ -28,8 +28,8 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.slice(0).map((row: string[], rowIndex: number) => (
-            <ProductRow key={rowIndex} rowIndex={rowIndex} row={row} />
+        {data.map(({ row, index }) => (
+            <ProductRow key={index} rowIndex={index} row={row} />
           ))}
         </TableBody>
       </Table>
