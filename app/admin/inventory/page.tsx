@@ -2,18 +2,20 @@
 import { InventoryTableClient } from './inventory-table';
 import { getSheetData, getUniqueFamilies } from '@/lib/googleapi';
 
-export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string } }) {
+export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string, searchB?: string } }) {
   const searchA = searchParams.searchA || '';
+  const searchB = searchParams.searchB || '';
   return {
     props: {
-      searchA
+      searchA, searchB
     }
   };
 }
 
-export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string } }) {
+export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string, searchB?: string } }) {
   const searchA = searchParams.searchA || '';
-  const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:D', searchA);
+  const searchB = searchParams.searchB || '';
+  const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:D', searchA,searchB);
   const families = await getUniqueFamilies(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!D:D');
 
 
