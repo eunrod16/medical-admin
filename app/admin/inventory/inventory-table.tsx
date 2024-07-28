@@ -18,8 +18,6 @@ interface InventoryTableClientProps {
 export function InventoryTableClient({ data }: InventoryTableClientProps) {
 
 
-  const updateProduct = updatePatient.bind( null, pacienteId, search,nextStatus );
-
   return (
     <form className="border shadow-sm rounded-lg">
       <Table>
