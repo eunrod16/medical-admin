@@ -18,7 +18,9 @@ export async function getUniqueFamilies(spreadsheetId: string, range: string) {
   });
 
   const data = response.data.values || [];
+  console.log("uniqueFamilies-data",data);
   const families = data.slice(1).map(row => row[3]); // Obtener valores de la columna D (índice 3)
+  console.log("uniqueFamilies-families",families)
   const uniqueFamilies: string[] = []; // Array para almacenar los valores únicos
 
   // Recorrer los datos y agregar solo valores únicos al array
@@ -27,7 +29,7 @@ export async function getUniqueFamilies(spreadsheetId: string, range: string) {
       uniqueFamilies.push(family);
     }
   });
-  console.log("uniqueFamilies",uniqueFamilies)
+  console.log("uniqueFamilies",uniqueFamilies);
 
   return uniqueFamilies;
 }
