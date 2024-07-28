@@ -4,7 +4,7 @@ import { google } from 'googleapis';
 
 
   export async function updateSheetData(rowIndex: number, newValue: string) {
-    console.log("updateSheetData", rowIndex)
+    console.log("updateSheetData", rowIndex, newValue)
     const auth = new google.auth.GoogleAuth({
       credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
