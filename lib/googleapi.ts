@@ -20,6 +20,7 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
   // Filtrar los datos si hay un término de búsqueda
   if (searchA) {
     data = data.filter(row => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
+    console.log("data:",data);
   }
   else{
     data = data.slice(5);

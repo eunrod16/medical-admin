@@ -1,6 +1,7 @@
 'use server';
 
 import { google } from 'googleapis';
+import { revalidatePath } from 'next/cache';
 
 
   export async function updateSheetData(rowIndex: number, newValue: number, oldValue:number) {
@@ -13,7 +14,7 @@ import { google } from 'googleapis';
     const sheets = google.sheets({ version: 'v4', auth });
   
     // Ajusta el rango para que coincida con la fila que deseas actualizar
-    const range = `adults!C${rowIndex }`; // +2 si hay una fila de encabezado
+    const range = `adults!C${rowIndex+6 }`; // +2 si hay una fila de encabezado
   
     try {
       await sheets.spreadsheets.values.update({
@@ -23,7 +24,9 @@ import { google } from 'googleapis';
         requestBody: {
           values: [[newValue]],
         },
-      });
+      })
+      revalidatePath('/admin/inventory');
+      ;
     } catch (error) {
       console.error('Error updating sheet data:', error);
     }
