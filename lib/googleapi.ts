@@ -3,31 +3,35 @@
 // lib/googleapi.ts
 import { google } from 'googleapis';
 
+
 export async function getSheetData(spreadsheetId: string, range: string, searchA: string = '') {
-  const auth = new google.auth.GoogleAuth({
-    credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
-    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-  });
-
-  const sheets = google.sheets({ version: 'v4', auth });
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range,
-  });
-
-  let data = response.data.values || [];
-
-  // Filtrar los datos si hay un término de búsqueda
-  if (searchA) {
-    data = data.filter(row => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
-    console.log("data:",data);
+    const auth = new google.auth.GoogleAuth({
+      credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
+      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+    });
+  
+    const sheets = google.sheets({ version: 'v4', auth });
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    });
+  
+    let data = response.data.values || [];
+  
+    // Crear un array con objetos que contengan la fila y el índice
+    let result = data.map((row, index) => ({ row, index: index + 1 }));
+  
+    // Filtrar los datos si hay un término de búsqueda
+    if (searchA) {
+      result = result.filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
+    } else {
+      result = result.slice(5).map(({ row, index }) => ({ row, index: index + 5 }));
+    }
+    console.log("result",result)
+  
+    return result;
   }
-  else{
-    data = data.slice(5);
-  }
 
-  return data;
-}
 
 export async function updateSheetData(rowIndex: number, newValue: string) {
     const auth = new google.auth.GoogleAuth({
