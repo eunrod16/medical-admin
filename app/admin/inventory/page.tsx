@@ -36,7 +36,7 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
       <form action="" method="get" className="mb-4">
         <select
           name="searchB"
-          className="border p-2 rounded mb-4"
+          className="border p-2 rounded mb-4 text-sm"
         >
           <option value="">Seleccionar familia</option>
           {families.map((family, index) => (

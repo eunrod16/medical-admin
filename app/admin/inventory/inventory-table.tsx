@@ -22,7 +22,9 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
         <TableHeader>
           <TableRow>
             <TableHead>Medicamento</TableHead>
-         
+            <TableHead className="hidden md:table-cell">Presentación</TableHead>
+            <TableHead>Cantidad Actual</TableHead>
+            <TableHead className="hidden md:table-cell">Familia</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -48,7 +50,7 @@ function ProductRow({ rowIndex, row }: { rowIndex: number; row: string[] }) {
   return (
     <TableRow key={rowIndex}>
       {row.map((cell: string, cellIndex: number) => {
-        const className = cellIndex === 0  ? 'font-medium' : 'hidden md:table-cell';
+        const className = cellIndex === 0 || cellIndex === 2 ? 'font-medium' : 'hidden md:table-cell';
         return (
           <TableCell key={cellIndex} className={className}>
             {cellIndex === 2 ? (
