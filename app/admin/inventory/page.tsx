@@ -46,6 +46,7 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
           ))}
 
         </select>
+        <br></br>
         <select
           name="searchC"
           className="border p-2 rounded mb-4 text-sm"

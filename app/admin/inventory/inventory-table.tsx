@@ -25,6 +25,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
             <TableHead className="hidden md:table-cell">Presentación</TableHead>
             <TableHead>Inventario</TableHead>
             <TableHead className="hidden md:table-cell">Familia</TableHead>
+            <TableHead className="hidden md:table-cell">Grupo</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
