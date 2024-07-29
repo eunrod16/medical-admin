@@ -2,20 +2,22 @@
 import { InventoryTableClient } from './inventory-table';
 import { getSheetData, getUniqueFamilies } from '@/lib/googleapi';
 
-export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string, searchB?: string } }) {
+export async function generateMetadata({ searchParams }: { searchParams: { searchA?: string, searchB?: string, searchC?: string } }) {
   const searchA = searchParams.searchA || '';
   const searchB = searchParams.searchB || '';
+  const searchC = searchParams.searchC || '';
   return {
     props: {
-      searchA, searchB
+      searchA, searchB, searchC
     }
   };
 }
 
-export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string, searchB?: string } }) {
+export default async function InventoryPage({ searchParams }: { searchParams: { searchA?: string, searchB?: string ,  searchC?: string } }) {
   const searchA = searchParams.searchA || '';
   const searchB = searchParams.searchB || '';
-  const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:D', searchA,searchB);
+  const searchC = searchParams.searchC || '';
+  const data = await getSheetData(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!A:E', searchA,searchB, searchC);
   const families = await getUniqueFamilies(process.env.SPREADSHEET_ID || '15P5ZQ2BGTqbl8qmkz2Vt1VOaKPFyx1Df2W_KPf0kT_s', 'adults!D:D');
 
 
@@ -42,6 +44,15 @@ export default async function InventoryPage({ searchParams }: { searchParams: { 
           {families.map((family, index) => (
             <option key={index} value={family}>{family}</option>
           ))}
+
+        </select>
+        <select
+          name="searchC"
+          className="border p-2 rounded mb-4 text-sm"
+        >
+          <option value="">Todos</option>
+          <option value="Adults">Adultos</option>
+          <option value="Kids">Niños</option>
 
         </select>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Buscar</button>

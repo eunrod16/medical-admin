@@ -23,7 +23,7 @@ export function InventoryTableClient({ data }: InventoryTableClientProps) {
           <TableRow>
             <TableHead>Medicamento</TableHead>
             <TableHead className="hidden md:table-cell">Presentación</TableHead>
-            <TableHead>Cantidad Actual</TableHead>
+            <TableHead>Inventario</TableHead>
             <TableHead className="hidden md:table-cell">Familia</TableHead>
           </TableRow>
         </TableHeader>

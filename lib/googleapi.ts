@@ -36,7 +36,7 @@ export async function getUniqueFamilies(spreadsheetId: string, range: string) {
 
 
 
-export async function getSheetData(spreadsheetId: string, range: string, searchA: string = '', searchB: string = '') {
+export async function getSheetData(spreadsheetId: string, range: string, searchA: string = '', searchB: string = '', searchC: string = '') {
     const auth = new google.auth.GoogleAuth({
       credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY as string),
       scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
@@ -55,17 +55,21 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
   
     // Filtrar los datos si hay un término de búsqueda
     if (searchA) {
-      result = result.filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
-    }
-    else if (searchB) {
+        result = result.filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
+      }
+      if (searchB) {
         result = result.filter(({ row }) => row[3]?.toLowerCase().includes(searchB.toLowerCase()));
-    }
-     else {
-      result = result.slice(5).map(({ row, index }) => ({ row, index: index  }));
-    }
-    console.log("result",result)
-  
-    return result;
+      }
+      if (searchC) {
+        result = result.filter(({ row }) => row[4]?.toLowerCase().includes(searchC.toLowerCase()));
+      }
+    
+      if (!searchA && !searchB && !searchC) {
+        result = result.slice(5).map(({ row, index }) => ({ row, index: index }));
+      }
+      console.log("result", result);
+
+      return result;
   }
 
 
