@@ -19,7 +19,7 @@ export async function getUniqueFamilies(spreadsheetId: string, range: string) {
 
   const data = response.data.values || [];
   console.log("uniqueFamilies-data",data);
-  const families = data.slice(1).map(row => row[0]); // Obtener valores de la columna D (índice 3)
+  const families = data.slice(5).map(row => row[0]); // Obtener valores de la columna D (índice 3)
   console.log("uniqueFamilies-families",families)
   const uniqueFamilies: string[] = []; // Array para almacenar los valores únicos
 
