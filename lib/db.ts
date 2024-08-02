@@ -145,7 +145,7 @@ export async function updateStatusbyId (id: number, status:string){
 export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string, presion:string, pulso:string, peso:string, temperatura:string) {
   var ListaMedicos = []
   if(option=='MG'){
-    ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos);
+    ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos).where(ne(medicos.especialidad, 'N'));
 
   }
   else{
