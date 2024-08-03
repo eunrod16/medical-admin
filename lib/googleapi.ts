@@ -58,10 +58,10 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
         result = result.slice(5).filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
       }
       if (searchB) {
-        result = result.slice(5).filter(({ row }) => row[3]?.toLowerCase().includes(searchB.toLowerCase()));
+        result = result.filter(({ row }) => row[3]?.toLowerCase().includes(searchB.toLowerCase()));
       }
       if (searchC) {
-        result = result.slice(5).filter(({ row }) => row[4]?.toLowerCase().includes(searchC.toLowerCase()));
+        result = result.filter(({ row }) => row[4]?.toLowerCase().includes(searchC.toLowerCase()));
       }
     
       if (!searchA && !searchB && !searchC) {
