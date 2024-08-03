@@ -52,23 +52,20 @@ export async function getSheetData(spreadsheetId: string, range: string, searchA
   
     // Crear un array con objetos que contengan la fila y el índice
     let result = data.map((row, index) => ({ row, index: index + 1 }));
-  
+    result = result.slice(5);
     // Filtrar los datos si hay un término de búsqueda
     if (searchA) {
-        result = result.slice(5);
         result = result.filter(({ row }) => row[0]?.toLowerCase().includes(searchA.toLowerCase()));
       }
       if (searchB) {
-        result = result.slice(5);
         result = result.filter(({ row }) => row[3]?.toLowerCase().includes(searchB.toLowerCase()));
       }
       if (searchC) {
-        result = result.slice(5);
         result = result.filter(({ row }) => row[4]?.toLowerCase().includes(searchC.toLowerCase()));
       }
     
       if (!searchA && !searchB && !searchC) {
-        result = result.slice(5).map(({ row, index }) => ({ row, index: index }));
+        result = result.map(({ row, index }) => ({ row, index: index }));
       }
       console.log("result", result);
 
