@@ -25,7 +25,7 @@ export default async function IndexPage({
       </div>
       <div>
         <label htmlFor="age" className="block text-xs text-gray-600 uppercase">Edad</label>
-        <input id="age" name="age" value={paciente.edad  ?? ''}  type="number" disabled className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <input id="age" name="age" value={paciente.edad  ?? ''}  type="text" disabled className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
         <label htmlFor="phone" className="block text-xs text-gray-600 uppercase">Teléfono</label>

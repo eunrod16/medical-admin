@@ -26,6 +26,12 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
       <div>
         <label htmlFor="age" className="block text-xs text-gray-600 uppercase">Edad</label>
         <input id="age" name="age" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <select id="age_2" name="age_2" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black">
+          <option value="">años/meses</option>
+          <option value="Años">Años</option>
+          <option value="Meses">Meses</option>
+        </select>
+      
       </div>
       <div>
         <label htmlFor="phone" className="block text-xs text-gray-600 uppercase">Teléfono</label>

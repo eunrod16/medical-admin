@@ -10,7 +10,7 @@ async function register(formData: FormData) {
    let telefono = formData.get('phone') as string;
    let email = formData.get('email') as string;
    let option = formData.get('options') as string;
-   let edad = formData.get('age') as string;
+   let edad = (formData.get('age') as string) + " "+ (formData.get('age_2') as string);
    let serial = formData.get('numero_paciente') as string;
    let presion = formData.get('presion') as string;
    let pulso = formData.get('pulse') as string;

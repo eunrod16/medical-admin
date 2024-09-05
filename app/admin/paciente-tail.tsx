@@ -15,7 +15,9 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
 export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[];  }) {
-
+  if (!initialPacientes) {
+    return <p>No hay pacientes disponibles.</p>;
+  }
 
   const router = useRouter();
   const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
