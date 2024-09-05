@@ -14,7 +14,7 @@ export default async function IndexPage() {
       <div className="flex items-center mb-8">
         <h1 className="font-semibold text-lg md:text-2xl">Sala de Espera</h1>
       </div>
-      <UsersTable initialPacientes={ []} />
+      <UsersTable initialPacientes={[]}  />
 
     </main>
   );
