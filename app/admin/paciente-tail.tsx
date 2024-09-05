@@ -22,6 +22,7 @@ export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[
 
   useEffect(() => {
     const fetchData = async () => {
+      console.error('Inside the loop');
       try {
         const { pacientesTail: updatedPacientes } = await fetchTail(); // Implement fetchTail to get the latest data
         setPacientes(updatedPacientes);
