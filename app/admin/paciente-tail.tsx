@@ -14,15 +14,12 @@ import { deleteUser, fetchTail } from './actions';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
-export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[];  }) {
-
+export function UsersTable() {
   const router = useRouter();
-  const [pacientes, setPacientes] = useState<SelectUser[]>(initialPacientes);
-
+  const [pacientes, setPacientes] = useState<SelectUser[]>([]); // Iniciamos como array vacío
 
   useEffect(() => {
     const fetchData = async () => {
-      console.error('Inside the loop');
       try {
         const { pacientesTail: updatedPacientes } = await fetchTail(); // Implement fetchTail to get the latest data
         setPacientes(updatedPacientes);
@@ -31,17 +28,15 @@ export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[
       }
     };
 
-    // Initial data fetch
+    // Fetch data when the component mounts
     fetchData();
 
-    // Set interval to reload data every 10 seconds 10000
+    // Set interval to reload data every 10 seconds
     const intervalId = setInterval(fetchData, 10000);
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
-
-
 
   return (
     <>
@@ -61,7 +56,6 @@ export function UsersTable({ initialPacientes }: { initialPacientes: SelectUser[
           </TableBody>
         </Table>
       </form>
-
     </>
   );
 }
