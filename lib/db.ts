@@ -27,7 +27,8 @@ export const pacientes = pgTable('pacientes', {
   pulso: varchar('pulso', { length: 10 }),
   presion: varchar('presion', { length: 3 }),
   temperatura: varchar('temperatura', { length: 3 }),
-  peso: varchar('peso', { length: 3 })
+  peso: varchar('peso', { length: 3 }),
+  text: varchar('text', { length: 1000 })
 });
 
 export const medicos = pgTable('medicos', {
@@ -50,6 +51,7 @@ export type Paciente = {
   presion: string | null;
   temperatura: string | null;
   peso: string | null;
+  text: string | null;
 };
 
 export type SelectUser = typeof pacientes.$inferSelect;
@@ -142,7 +144,7 @@ export async function updateStatusbyId (id: number, status:string){
   .where(eq(pacientes.id, id));
 }
 
-export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string, presion:string, pulso:string, peso:string, temperatura:string) {
+export async function createPatient(numero_paciente: string, nombre: string, direccion:string, email:string, telefono:string, option:string, edad:string, presion:string, pulso:string, peso:string, temperatura:string, text:string) {
   var ListaMedicos = []
   if(option=='MG'){
     ListaMedicos = await db.select({ nombre: medicos.nombre }).from(medicos).where(ne(medicos.especialidad, 'N'));
@@ -175,7 +177,7 @@ export async function createPatient(numero_paciente: string, nombre: string, dir
     }
  
 
-  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono, presion:presion, pulso:pulso, peso:peso, temperatura:temperatura });
+  await db.insert(pacientes).values({ serial:numero_paciente, nombre: nombre, direccion: direccion, email: email, estado: "En Espera", medico: medicoElegido, edad:edad, telefono: telefono, presion:presion, pulso:pulso, peso:peso, temperatura:temperatura, text:text });
 }
 
 export async function getUser(email: string) {
