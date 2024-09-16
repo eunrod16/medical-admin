@@ -57,7 +57,7 @@ export default async function IndexPage({
       </div>
       <div>
         <label htmlFor="text" className="block text-xs text-gray-600 uppercase">Antecedentes</label>
-        <textarea id="text" name="text" value={paciente.text  ?? ''}  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+        <textarea id="text" name="text" value={paciente.text  ?? ''} disabled  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
 
  
