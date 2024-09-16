@@ -16,7 +16,8 @@ async function register(formData: FormData) {
    let pulso = formData.get('pulse') as string;
    let peso = formData.get('weight') as string;
    let temperatura = formData.get('temperature') as string;
-   await createPatient(serial,nombre,direccion, email, telefono,option,edad,presion,pulso,peso,temperatura );
+   let text = formData.get('text') as string;
+   await createPatient(serial,nombre,direccion, email, telefono,option,edad,presion,pulso,peso,temperatura,text );
  
  
  }

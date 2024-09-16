@@ -62,6 +62,10 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
         <input id="weight" name="weight" type="number"  className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
       </div>
       <div>
+        <label htmlFor="weight" className="block text-xs text-gray-600 uppercase">Antecedentes</label>
+        <textarea id="text" name="text" className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black" />
+      </div>
+      <div>
         <label htmlFor="options" className="block text-xs text-gray-600 uppercase">Médico Seleccionado</label>
         <select id="options" name="options" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black">
           <option value="">Please select an option</option>
