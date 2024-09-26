@@ -70,8 +70,8 @@ export function Form({ action, children }: { action: (formData: FormData) => Pro
         <select id="options" name="options" required className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black">
           <option value="">Please select an option</option>
           <option value="MG">Medicina General</option>
-          <option value="G">Ginecología</option>
-          <option value="N">Nutrición</option>
+          <option value="F">Fisioterapia</option>
+
         </select>
       </div>
       {children}
